@@ -26,7 +26,7 @@ jobs:
           MASTODON_BASE_URL: ${{ secrets.MASTODON_BASE_URL }}
           MASTODON_USERNAME: ${{ secrets.MASTODON_USERNAME }}
         run: |
-          python run.py -n 12 -s SimpleWeighted -t lax
+          python run.py -n 12 -s SimpleWeighted -t normal
       - name: publish
         uses: crazy-max/ghaction-github-pages@v3
         with:
