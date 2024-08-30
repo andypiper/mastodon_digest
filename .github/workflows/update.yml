@@ -13,9 +13,9 @@ jobs:
         with:
           ref: main
       - name: python setup
-        uses: actions/setup-python@v2
+        uses: actions/setup-python@v5
         with:
-          python-version: '3.9'
+          python-version: '3.10'
       - name: python things
         run: |
           python -m pip install --upgrade pip
@@ -28,7 +28,7 @@ jobs:
         run: |
           python run.py -n 8 -s ExtendedSimpleWeighted -t normal
       - name: publish
-        uses: crazy-max/ghaction-github-pages@v3
+        uses: crazy-max/ghaction-github-pages@v4
         with:
           target_branch: gh-pages
           build_dir: render
