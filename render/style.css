@@ -40,11 +40,10 @@ body {
 
 .blocks {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     line-height: 1.6;
-	flex-direction: row;
-	column-gap: 15px;
-	flex-wrap: wrap;
+    column-gap: 15px;
+    flex-wrap: wrap;
     justify-content: center;
 }
 
@@ -101,7 +100,7 @@ body {
     background-color: var(--background);
     padding: 0px;
     display: flex;
-    overflow: scroll;
+    overflow: auto;
     flex-direction: row;
     flex-wrap: wrap;
     /*! gap: 15px; */
@@ -152,8 +151,8 @@ body {
 }
 
 .links a[href] {
-    color: var(--test);
-  }
+    color: var(--text);
+}
 
 .post a {
     text-decoration: none;

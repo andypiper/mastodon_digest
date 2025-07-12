@@ -4,7 +4,7 @@ import importlib
 import inspect
 from abc import ABC, abstractmethod
 from math import sqrt
-from typing import TYPE_CHECKING
+from typing import TYPE_CHECKING, Self
 
 from scipy import stats
 
@@ -21,21 +21,19 @@ class Weight(ABC):
 
 class UniformWeight(Weight):
     @classmethod
-    def weight(cls, scored_post: ScoredPost) -> UniformWeight:
-        return 1
+    def weight(cls, scored_post: ScoredPost) -> float:
+        return 1.0
 
 
 class InverseFollowerWeight(Weight):
     @classmethod
-    def weight(cls, scored_post: ScoredPost) -> InverseFollowerWeight:
+    def weight(cls, scored_post: ScoredPost) -> float:
         # Zero out posts by accounts with zero followers that somehow made it to my feed
-        if scored_post.info["account"]["followers_count"] == 0:
-            weight = 0
-        else:
-            # inversely weight against how big the account is
-            weight = 1 / sqrt(scored_post.info["account"]["followers_count"])
-
-        return weight
+        followers_count = scored_post.info["account"]["followers_count"]
+        if followers_count == 0:
+            return 0.0
+        # inversely weight against how big the account is
+        return 1.0 / sqrt(followers_count)
 
 
 class Scorer(ABC):
@@ -51,7 +49,7 @@ class Scorer(ABC):
 
 class SimpleScorer(UniformWeight, Scorer):
     @classmethod
-    def score(cls, scored_post: ScoredPost) -> SimpleScorer:
+    def score(cls, scored_post: ScoredPost) -> float:
         if scored_post.info["reblogs_count"] or scored_post.info["favourites_count"]:
             # If there's at least one metric
             # We don't want zeros in other metrics to multiply that out
@@ -69,13 +67,13 @@ class SimpleScorer(UniformWeight, Scorer):
 
 class SimpleWeightedScorer(InverseFollowerWeight, SimpleScorer):
     @classmethod
-    def score(cls, scored_post: ScoredPost) -> SimpleWeightedScorer:
+    def score(cls, scored_post: ScoredPost) -> float:
         return super().score(scored_post) * super().weight(scored_post)
 
 
 class ExtendedSimpleScorer(UniformWeight, Scorer):
     @classmethod
-    def score(cls, scored_post: ScoredPost) -> ExtendedSimpleScorer:
+    def score(cls, scored_post: ScoredPost) -> float:
         if scored_post.info["reblogs_count"] or scored_post.info["favourites_count"] or scored_post.info["replies_count"]:
             # If there's at least one metric
             # We don't want zeros in other metrics to multiply that out
@@ -94,7 +92,7 @@ class ExtendedSimpleScorer(UniformWeight, Scorer):
 
 class ExtendedSimpleWeightedScorer(InverseFollowerWeight, ExtendedSimpleScorer):
     @classmethod
-    def score(cls, scored_post: ScoredPost) -> ExtendedSimpleWeightedScorer:
+    def score(cls, scored_post: ScoredPost) -> float:
         return super().score(scored_post) * super().weight(scored_post)
 
 

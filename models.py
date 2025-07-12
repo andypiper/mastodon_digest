@@ -7,7 +7,7 @@ if TYPE_CHECKING:
 
 
 class ScoredPost:
-    def __init__(self, info: dict):
+    def __init__(self, info: dict) -> None:
         self.info = info
 
     @property
@@ -21,5 +21,5 @@ class ScoredPost:
         return scorer.score(self)
 
     @property
-    def data(self):
+    def data(self) -> dict:
         return self.info

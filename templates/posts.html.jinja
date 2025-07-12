@@ -1,30 +1,30 @@
 {% for post in posts %}
 
-<div class="post">
+<article class="post" role="article">
 
   <div class="status">  
   
     <div class="post_header">
 
-        <div class="user">
+        <div class="user" role="group" aria-label="Post author">
 
           <div class="avatar">
-            <a target="_blank" href="{{ post['account_url'] }}">
-              <img src="{{ post['account_avatar'] }}">
+            <a target="_blank" href="{{ post['account_url'] }}" rel="noopener">
+              <img src="{{ post['account_avatar'] }}" alt="{{ post['display_name'] }} avatar">
             </a>
           </div>
         
-          <a target="_blank" href="{{ post['account_url'] }}">
+          <a target="_blank" href="{{ post['account_url'] }}" rel="noopener">
             <span class="displayname">{{ post['display_name'] }}</span>
             <span class="username">@{{ post['username'] }}</span>
           </a>
 
         </div>
 
-        <div class="links">
+        <nav class="links" aria-label="Post links">
           {{ post['home_link'] }}
           {{ post['original_link'] }}
-        </div>
+        </nav>
 
     </div>
       
@@ -46,16 +46,16 @@
 
       <div class="published date" data-date="{{ post['created_at'] }}"></div>
       
-      <div class="reactions">
-        <span>⥄ {{post['replies_count']}}</span>
-        <span> ↻ {{post['reblogs_count']}}</span>
-        <span>★ {{post['favourites_count']}}</span>
+      <div class="reactions" role="group" aria-label="Post engagement metrics">
+        <span aria-label="{{post['replies_count']}} replies">⥄ {{post['replies_count']}}</span>
+        <span aria-label="{{post['reblogs_count']}} boosts"> ↻ {{post['reblogs_count']}}</span>
+        <span aria-label="{{post['favourites_count']}} favorites">★ {{post['favourites_count']}}</span>
       </div>
       
     </div>
     
   </div>
 
-</div>
+</article>
 
 {% endfor %}

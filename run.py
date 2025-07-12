@@ -3,7 +3,7 @@ from __future__ import annotations
 import argparse
 import os
 import sys
-from datetime import datetime
+from datetime import datetime, timezone
 from pathlib import Path
 from typing import TYPE_CHECKING
 
@@ -63,7 +63,7 @@ def run(
             "posts": threshold_posts,
             "boosts": threshold_boosts,
             "mastodon_base_url": mastodon_base_url,
-            "rendered_at": datetime.utcnow().isoformat() + 'Z',
+            "rendered_at": datetime.now(timezone.utc).isoformat().replace('+00:00', 'Z'),
             # "rendered_at": datetime.utcnow().strftime('%B %d, %Y at %H:%M:%S UTC'),
             "threshold": threshold.get_name(),
             "scorer": scorer.get_name(),
@@ -121,19 +121,23 @@ if __name__ == "__main__":
     args = arg_parser.parse_args()
 
     output_dir = Path(args.output_dir)
-    if not output_dir.exists() or not output_dir.is_dir():
+    if not (output_dir.exists() and output_dir.is_dir()):
         sys.exit(f"Output directory not found: {args.output_dir}")
 
     mastodon_token = os.getenv("MASTODON_TOKEN")
     mastodon_base_url = os.getenv("MASTODON_BASE_URL")
     mastodon_username = os.getenv("MASTODON_USERNAME")
 
+    missing_vars = []
     if not mastodon_token:
-        sys.exit("Missing environment variable: MASTODON_TOKEN")
+        missing_vars.append("MASTODON_TOKEN")
     if not mastodon_base_url:
-        sys.exit("Missing environment variable: MASTODON_BASE_URL")
+        missing_vars.append("MASTODON_BASE_URL")
     if not mastodon_username:
-        sys.exit("Missing environment variable: MASTODON_USERNAME")
+        missing_vars.append("MASTODON_USERNAME")
+    
+    if missing_vars:
+        sys.exit(f"Missing environment variables: {', '.join(missing_vars)}")
 
     run(
         args.hours,
