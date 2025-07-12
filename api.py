@@ -10,11 +10,29 @@ if TYPE_CHECKING:
 
 
 def fetch_posts_and_boosts(
-    hours: int, mastodon_client: Mastodon, mastodon_username: str
+    hours: int, mastodon_client: Mastodon
 ) -> tuple[list[ScoredPost], list[ScoredPost]]:
-    """Fetches posts form the home timeline that the account hasn't interactied with"""
+    """
+    Fetches posts from the home timeline that the account hasn't interacted with,
+    applying enhanced filtering to respect user privacy preferences.
+
+    Filters out:
+    - Posts the user has already interacted with (reblogged, favourited, bookmarked)
+    - The user's own posts
+    - Posts from accounts with API-level noindex flag set
+    - Posts from accounts with #noindex in their bio
+    - Posts from accounts with #nobot in their bio
+    """
 
     TIMELINE_LIMIT = 1000
+
+    # Get authenticated user info from API
+    try:
+        mastodon_acct = mastodon_client.me()['acct'].strip().lower()
+        print(f"Authenticated as: @{mastodon_acct}")
+    except Exception as e:
+        print(f"Error getting current user: {e}")
+        return [], []
 
     # First, get our filters
     filters = mastodon_client.filters()
@@ -45,19 +63,27 @@ def fetch_posts_and_boosts(
 
             boost = False
             if post["reblog"] is not None:
-                post = post["reblog"]  # look at the bosted post
+                post = post["reblog"]  # look at the boosted post
                 boost = True
 
             scored_post = ScoredPost(post)  # wrap the post data as a ScoredPost
 
             if scored_post.url not in seen_post_urls:
-                # Apply our local filters
-                # Basically ignore my posts or posts I've interacted with
+                # Enhanced filtering with both API and bio hashtag checking
+                user_bio = scored_post.info["account"]["note"].lower()
+                user_acct = scored_post.info["account"]["acct"].strip().lower()
+
+                # Check noindex API attribute (v4.0.0+)
+                has_noindex = scored_post.info["account"].get("noindex", False)
+
                 if (
                     not scored_post.info["reblogged"]
                     and not scored_post.info["favourited"]
                     and not scored_post.info["bookmarked"]
-                    and scored_post.info["account"]["acct"] != mastodon_username
+                    and user_acct != mastodon_acct
+                    and not has_noindex
+                    and "#noindex" not in user_bio
+                    and "#nobot" not in user_bio
                 ):
                     # Append to either the boosts list or the posts lists
                     if boost:
@@ -68,6 +94,6 @@ def fetch_posts_and_boosts(
 
         response = mastodon_client.fetch_previous(
             response
-        )  # fext the previous (because of reverse chron) page of results
+        )  # fetch the previous (because of reverse chron) page of results
 
     return posts, boosts
