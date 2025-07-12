@@ -34,7 +34,6 @@ def run(
     threshold: Threshold,
     mastodon_token: str,
     mastodon_base_url: str,
-    mastodon_username: str,
     output_dir: Path,
 ) -> None:
 
@@ -43,10 +42,11 @@ def run(
     mst = Mastodon(
         access_token=mastodon_token,
         api_base_url=mastodon_base_url,
+        user_agent="mastodon_digest_builder"
     )
 
     # 1. Fetch all the posts and boosts from our home timeline that we haven't interacted with
-    posts, boosts = fetch_posts_and_boosts(hours, mst, mastodon_username)
+    posts, boosts = fetch_posts_and_boosts(hours, mst)
 
     # 2. Score them, and return those that meet our threshold
     threshold_posts = format_posts(
@@ -64,7 +64,6 @@ def run(
             "boosts": threshold_boosts,
             "mastodon_base_url": mastodon_base_url,
             "rendered_at": datetime.now(timezone.utc).isoformat().replace('+00:00', 'Z'),
-            # "rendered_at": datetime.utcnow().strftime('%B %d, %Y at %H:%M:%S UTC'),
             "threshold": threshold.get_name(),
             "scorer": scorer.get_name(),
         },
@@ -93,10 +92,10 @@ if __name__ == "__main__":
         choices=list(scorers.keys()),
         default="SimpleWeighted",
         dest="scorer",
-        help="""Which post scoring criteria to use.  
-            Simple scorers take a geometric mean of boosts and favs. 
-            Extended scorers include reply counts in the geometric mean. 
-            Weighted scorers multiply the score by an inverse sqaure root 
+        help="""Which post scoring criteria to use.
+            Simple scorers take a geometric mean of boosts and likes.
+            Extended scorers include reply counts in the geometric mean.
+            Weighted scorers multiply the score by an inverse square root
             of the author's followers, to reduce the influence of large accounts.
         """,
     )
@@ -126,16 +125,13 @@ if __name__ == "__main__":
 
     mastodon_token = os.getenv("MASTODON_TOKEN")
     mastodon_base_url = os.getenv("MASTODON_BASE_URL")
-    mastodon_username = os.getenv("MASTODON_USERNAME")
 
     missing_vars = []
     if not mastodon_token:
         missing_vars.append("MASTODON_TOKEN")
     if not mastodon_base_url:
         missing_vars.append("MASTODON_BASE_URL")
-    if not mastodon_username:
-        missing_vars.append("MASTODON_USERNAME")
-    
+
     if missing_vars:
         sys.exit(f"Missing environment variables: {', '.join(missing_vars)}")
 
@@ -145,6 +141,5 @@ if __name__ == "__main__":
         get_threshold_from_name(args.threshold),
         mastodon_token,
         mastodon_base_url,
-        mastodon_username,
         output_dir,
     )
