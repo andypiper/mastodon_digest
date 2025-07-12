@@ -1,3 +1,4 @@
-Jinja2==3.1.*
-Mastodon.py==1.8.*
-scipy==1.9.*
+Jinja2==3.1.6
+Mastodon.py==2.0.1
+scipy==1.16.0
+numpy>=1.25.2

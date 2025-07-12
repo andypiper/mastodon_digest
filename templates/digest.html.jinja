@@ -14,41 +14,40 @@
   <body>
 
     <div id="container">
+      <main class="blocks">
 
-      <div class="blocks">
+        <header class="header">
 
-        <div class="header">
+          <h1 class="title">Mastodon Digest</h1>
 
-          <div class="title">Mastodon Digest</div>
-
-          <div class="run_time date" data-date="{{ rendered_at }}"></div>
-          <div class="run_score">
+          <div class="run_time date" data-date="{{ rendered_at }}" aria-label="Digest generated time"></div>
+          <div class="run_score" aria-label="Digest parameters">
             <div><span class="meta_desc">for the past</span><span class="meta_data">{{ hours }} hours</span></div>
             <div><span class="meta_data">{{ scorer.lower() }}</span><span class="meta_desc">scorer</span></div>
             <div><span class="meta_data">{{ threshold }}</span><span class="meta_desc">threshold</span></div>
           </div>
           
-        </div>
+        </header>
 
-        <div class="stream">
-          <div class="stream_title"><span>Posts</span></div>
-          <div class="posts">
+        <section class="stream">
+          <h2 class="stream_title"><span>Posts</span></h2>
+          <div class="posts" role="feed" aria-label="Popular posts from your timeline">
             {% with posts=posts %}
             {% include "posts.html.jinja" %}
             {% endwith %}
           </div>
-        </div>
+        </section>
 
-        <div class="stream">
-          <div class="stream_title"><span>Boosts</span></div>
-          <div class="posts">
+        <section class="stream">
+          <h2 class="stream_title"><span>Boosts</span></h2>
+          <div class="posts" role="feed" aria-label="Popular boosts from your timeline">
             {% with posts=boosts %}
             {% include "posts.html.jinja" %}
             {% endwith %}
           </div>
-        </div>
+        </section>
 
-      </div>
+      </main>
       
     </div>
     
