@@ -1,5 +1,3 @@
-/* Start with exact original layout CSS, then add improvements */
-
 :root {
     /* Enhanced Color System */
     --background: #edeff2;
@@ -33,7 +31,6 @@
     }
 }
 
-/* Use original layout structure exactly */
 body {
     background-color: var(--background);
     color: var(--text);
@@ -65,11 +62,14 @@ body {
 }
 
 .header {
+    width: 200px;
+    min-width: 200px;
     max-width: 200px;
     text-align: right;
     padding: 15px;
     margin-top: 30px;
-    /* Add improved styling */
+    flex-shrink: 0;
+    align-self: flex-start;
     background: var(--post-background);
     border-radius: var(--radius-lg);
     box-shadow: var(--shadow-md);
@@ -132,7 +132,6 @@ body {
     gap: 1rem;
 }
 
-/* Enhanced Post Cards */
 .post {
     background: var(--post-background);
     border: 1px solid var(--post-border);
@@ -445,9 +444,7 @@ body {
         height: 56px;
     }
     
-    /* Remove touch targeting from non-interactive metrics */
     .reactions span {
-        /* Keep normal size - these are just display metrics */
         pointer-events: none;
         cursor: default;
     }
@@ -508,6 +505,13 @@ body {
     clip: rect(0, 0, 0, 0);
     white-space: nowrap;
     border: 0;
+}
+
+/* Hide skip link on mobile */
+@media (max-width: 600px) {
+    .sr-only {
+        display: none !important;
+    }
 }
 
 /* Mobile adjustments */
