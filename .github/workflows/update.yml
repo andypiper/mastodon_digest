@@ -1,7 +1,7 @@
 name: My Mastodon Digest
 on:
   schedule:
-    - cron: '0 10,18,22 * * *'
+    - cron: '0 8,18,23 * * *'
   workflow_dispatch:
 jobs:
   update:
@@ -9,11 +9,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: checkout
-        uses: actions/checkout@master
+        uses: actions/checkout@v4
         with:
           ref: main
       - name: python setup
-        uses: actions/setup-python@v5.6.0
+        uses: actions/setup-python@v5
         with:
           python-version: '3.13'
           cache: 'pip'
@@ -26,7 +26,7 @@ jobs:
           MASTODON_TOKEN: ${{ secrets.MASTODON_TOKEN }}
           MASTODON_BASE_URL: ${{ secrets.MASTODON_BASE_URL }}
         run: |
-          python run.py -n 8 -s ExtendedSimpleWeighted -t normal
+          python run.py -n 10 -s ExtendedSimpleWeighted -t normal
       - name: publish
         uses: crazy-max/ghaction-github-pages@v4
         with:
