@@ -6,19 +6,22 @@ if TYPE_CHECKING:
     from models import ScoredPost
 
 
+# Pre-compiled media formatters for better performance
+_MEDIA_FORMATTERS = {
+    'image': lambda url, desc: f'<div class="media"><img src="{url}" alt="{desc or ""}"></div>',
+    'video': lambda url, desc: f'<div class="media"><video src="{url}" controls width="100%"></video></div>',
+    'gifv': lambda url, desc: f'<div class="media"><video src="{url}" autoplay loop muted playsinline width="100%"></video></div>',
+}
+
+
 def format_post(post: ScoredPost, mastodon_base_url: str) -> dict[str, str | int]:
     
     def format_media(media) -> str:
-        # Use pattern matching for media type handling (Python 3.10+)
-        match media.type:
-            case 'image':
-                return f'<div class="media"><img src={media["url"]} alt="{media["description"] or ""}"></img></div>'
-            case 'video':
-                return f'<div class="media"><video src={media["url"]} controls width="100%"></video></div>'
-            case 'gifv':
-                return f'<div class="media"><video src={media["url"]} autoplay loop muted playsinline width="100%"></video></div>'
-            case _:
-                return ""
+        # Optimized: dictionary lookup instead of pattern matching
+        formatter = _MEDIA_FORMATTERS.get(media.type)
+        if formatter:
+            return formatter(media["url"], media.get("description"))
+        return ""
 
     def format_displayname(display_name: str, emojis: list[dict]) -> str:
         for emoji in emojis:

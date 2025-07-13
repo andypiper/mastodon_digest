@@ -9,6 +9,26 @@ if TYPE_CHECKING:
     from mastodon import Mastodon
 
 
+def _should_filter_user(user_acct: str, user_bio: str, has_noindex: bool, mastodon_acct: str) -> bool:
+    """
+    Returns True if the user should be filtered out (excluded from digest).
+    
+    Optimized for short-circuit evaluation - fastest checks first.
+    """
+    if user_acct == mastodon_acct:
+        return True  # Filter out own posts
+    
+    if has_noindex:
+        return True  # Filter out users with noindex API flag
+    
+    # Only perform string operations if necessary
+    user_bio_lower = user_bio.lower()
+    if "#noindex" in user_bio_lower or "#nobot" in user_bio_lower:
+        return True
+    
+    return False
+
+
 def fetch_posts_and_boosts(
     hours: int, mastodon_client: Mastodon
 ) -> tuple[list[ScoredPost], list[ScoredPost]]:
@@ -69,22 +89,18 @@ def fetch_posts_and_boosts(
             scored_post = ScoredPost(post)  # wrap the post data as a ScoredPost
 
             if scored_post.url not in seen_post_urls:
-                # Enhanced filtering with both API and bio hashtag checking
-                user_bio = scored_post.info["account"]["note"].lower()
+                # Check basic interaction flags first (fastest)
+                if (scored_post.info["reblogged"] or 
+                    scored_post.info["favourited"] or 
+                    scored_post.info["bookmarked"]):
+                    continue
+                
+                # Use optimized filtering for user-based decisions
                 user_acct = scored_post.info["account"]["acct"].strip().lower()
-
-                # Check noindex API attribute (v4.0.0+)
+                user_bio = scored_post.info["account"]["note"]  # Don't lowercase here
                 has_noindex = scored_post.info["account"].get("noindex", False)
-
-                if (
-                    not scored_post.info["reblogged"]
-                    and not scored_post.info["favourited"]
-                    and not scored_post.info["bookmarked"]
-                    and user_acct != mastodon_acct
-                    and not has_noindex
-                    and "#noindex" not in user_bio
-                    and "#nobot" not in user_bio
-                ):
+                
+                if not _should_filter_user(user_acct, user_bio, has_noindex, mastodon_acct):
                     # Append to either the boosts list or the posts lists
                     if boost:
                         boosts.append(scored_post)

@@ -3,6 +3,7 @@ from __future__ import annotations
 import argparse
 import os
 import sys
+import time
 from datetime import datetime, timezone
 from pathlib import Path
 from typing import TYPE_CHECKING
@@ -37,6 +38,7 @@ def run(
     output_dir: Path,
 ) -> None:
 
+    start_time = time.time()
     print(f"Building digest from the past {hours} hours...")
 
     mst = Mastodon(
@@ -46,17 +48,24 @@ def run(
     )
 
     # 1. Fetch all the posts and boosts from our home timeline that we haven't interacted with
+    fetch_start = time.time()
     posts, boosts = fetch_posts_and_boosts(hours, mst)
+    fetch_time = time.time() - fetch_start
+    print(f"Fetched {len(posts)} posts and {len(boosts)} boosts in {fetch_time:.2f}s")
 
     # 2. Score them, and return those that meet our threshold
+    scoring_start = time.time()
     threshold_posts = format_posts(
         threshold.posts_meeting_criteria(posts, scorer),
         mastodon_base_url)
     threshold_boosts = format_posts(
         threshold.posts_meeting_criteria(boosts, scorer),
         mastodon_base_url)
+    scoring_time = time.time() - scoring_start
+    print(f"Scored and formatted {len(threshold_posts)} posts and {len(threshold_boosts)} boosts in {scoring_time:.2f}s")
 
     # 3. Build the digest
+    render_start = time.time()
     render_digest(
         context={
             "hours": hours,
@@ -69,6 +78,10 @@ def run(
         },
         output_dir=output_dir,
     )
+    render_time = time.time() - render_start
+    total_time = time.time() - start_time
+    print(f"Rendered digest in {render_time:.2f}s")
+    print(f"Total execution time: {total_time:.2f}s")
 
 
 if __name__ == "__main__":
