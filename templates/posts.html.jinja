@@ -1,61 +1,104 @@
-{% for post in posts %}
+<article class="post" 
+         role="article" 
+         data-post-id="{{ post.get('id', '') }}"
+         tabindex="0"
+         aria-labelledby="post-author-{{ post.get('id', 'unknown') }}"
+         aria-describedby="post-content-{{ post.get('id', 'unknown') }} post-meta-{{ post.get('id', 'unknown') }}">
 
-<article class="post" role="article">
-
-  <div class="status">  
-  
-    <div class="post_header">
-
-        <div class="user" role="group" aria-label="Post author">
-
-          <div class="avatar">
-            <a target="_blank" href="{{ post['account_url'] }}" rel="noopener">
-              <img src="{{ post['account_avatar'] }}" alt="{{ post['display_name'] }} avatar">
-            </a>
-          </div>
+    <div class="status">
         
-          <a target="_blank" href="{{ post['account_url'] }}" rel="noopener">
-            <span class="displayname">{{ post['display_name'] }}</span>
-            <span class="username">@{{ post['username'] }}</span>
-          </a>
+        <header class="post_header">
+            <div class="user" 
+                 role="group" 
+                 aria-label="Post author information"
+                 id="post-author-{{ post.get('id', 'unknown') }}">
 
+                <div class="avatar">
+                    <a href="{{ post['account_url'] }}" 
+                       target="_blank" 
+                       rel="noopener"
+                       aria-label="View {{ post['display_name'] }}'s profile">
+                        <img src="{{ post['account_avatar'] }}" 
+                             alt="" 
+                             role="presentation"
+                             loading="lazy"
+                             decoding="async">
+                    </a>
+                </div>
+            
+                <a href="{{ post['account_url'] }}" 
+                   target="_blank" 
+                   rel="noopener"
+                   class="user-link"
+                   aria-label="View profile of {{ post['display_name'] }}, username {{ post['username'] }}">
+                    <span class="displayname">{{ post['display_name'] }}</span>
+                    <span class="username">@{{ post['username'] }}</span>
+                </a>
+
+            </div>
+
+            <nav class="links" 
+                 aria-label="Post actions"
+                 role="group">
+                {{ post['home_link'] }}
+                {{ post['original_link'] }}
+            </nav>
+
+        </header>
+          
+        <div class="post_content">
+            <div class="content" 
+                 id="post-content-{{ post.get('id', 'unknown') }}"
+                 role="main"
+                 aria-label="Post content">
+                {{ post['content'] | safe }}
+            </div>
+
+            {% if post['media'] %}
+            <div class="medias" 
+                 role="group" 
+                 aria-label="Media attachments">
+                {{ post['media'] | safe }}
+            </div>
+            {% endif %}
         </div>
 
-        <nav class="links" aria-label="Post links">
-          {{ post['home_link'] }}
-          {{ post['original_link'] }}
-        </nav>
+        <footer class="post_footer" 
+                id="post-meta-{{ post.get('id', 'unknown') }}"
+                role="contentinfo">
 
+            <time class="published date" 
+                  data-date="{{ post['created_at'] }}"
+                  datetime="{{ post['created_at'] }}"
+                  aria-label="Posted at {{ post['created_at'] }}">
+                <!-- JavaScript will populate this -->
+            </time>
+            
+            <div class="reactions" 
+                 role="group" 
+                 aria-label="Engagement metrics">
+                <span aria-label="{{ post['replies_count'] }} replies"
+                      role="img"
+                      title="Replies">
+                    <span aria-hidden="true">⥄</span>
+                    <span class="count">{{ post['replies_count'] }}</span>
+                </span>
+                <span aria-label="{{ post['reblogs_count'] }} boosts"
+                      role="img"
+                      title="Boosts">
+                    <span aria-hidden="true">↻</span>
+                    <span class="count">{{ post['reblogs_count'] }}</span>
+                </span>
+                <span aria-label="{{ post['favourites_count'] }} favorites"
+                      role="img"
+                      title="Favorites">
+                    <span aria-hidden="true">★</span>
+                    <span class="count">{{ post['favourites_count'] }}</span>
+                </span>
+            </div>
+            
+        </footer>
+        
     </div>
-      
-    <div class="post_content">
-
-      <div class="content">
-	      {{ post['content'] }}
-      </div>
-
-     {% if post['media'] %}
-        <div class="medias">
-	        {{ post['media'] }}
-        </div>
-     {% endif %}
-
-    </div>
-
-    <div class="post_footer">
-
-      <div class="published date" data-date="{{ post['created_at'] }}"></div>
-      
-      <div class="reactions" role="group" aria-label="Post engagement metrics">
-        <span aria-label="{{post['replies_count']}} replies">⥄ {{post['replies_count']}}</span>
-        <span aria-label="{{post['reblogs_count']}} boosts"> ↻ {{post['reblogs_count']}}</span>
-        <span aria-label="{{post['favourites_count']}} favorites">★ {{post['favourites_count']}}</span>
-      </div>
-      
-    </div>
-    
-  </div>
 
 </article>
-
-{% endfor %}

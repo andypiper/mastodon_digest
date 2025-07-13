@@ -21,14 +21,21 @@ class Threshold(Enum):
     def posts_meeting_criteria(
         self, posts: list[ScoredPost], scorer: Scorer
     ) -> list[ScoredPost]:
-        """Returns a list of ScoredPosts that meet this Threshold with the given Scorer"""
-
-        all_post_scores = [p.get_score(scorer) for p in posts]
+        """Returns a list of ScoredPosts that meet this Threshold with the given Scorer
+        
+        Optimized version: Caches scores to avoid recalculation while preserving original logic
+        """
+        if not posts:
+            return []
+        
+        # Score each post once and cache the result - O(n)
+        scored_posts = [(post, post.get_score(scorer)) for post in posts]
+        all_scores = [score for _, score in scored_posts]
+        
+        # Use original percentileofscore logic but with cached scores - O(n)
         threshold_posts = [
-            p
-            for p in posts
-            if stats.percentileofscore(all_post_scores, p.get_score(scorer))
-            >= self.value
+            post for post, score in scored_posts 
+            if stats.percentileofscore(all_scores, score) >= self.value
         ]
 
         return threshold_posts
