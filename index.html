@@ -1,0 +1,3309 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <title>Mastodon Digest - 10 Hours of Popular Posts</title>
+    <meta name="description" content="A curated digest of the most popular posts from your Mastodon timeline in the past 10 hours.">
+    
+    <!-- Preload critical resources -->
+    <link rel="preload" href="style.css" as="style">
+    <link rel="preload" href="style.js" as="script">
+    
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="style.css">
+    
+    <!-- Theme detection script (inline for immediate execution) -->
+    <script>
+        // Prevent FOUC by setting theme immediately
+        (function() {
+            const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+            const prefersContrast = window.matchMedia('(prefers-contrast: high)').matches;
+            const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+            
+            document.documentElement.setAttribute('data-theme', prefersDark ? 'dark' : 'light');
+            document.documentElement.setAttribute('data-contrast', prefersContrast ? 'high' : 'normal');
+            document.documentElement.setAttribute('data-motion', prefersReducedMotion ? 'reduced' : 'normal');
+        })();
+    </script>
+    
+    <!-- Icons and PWA manifest -->
+    <link rel="icon" href="icon.png" sizes="any">
+    <link rel="icon" href="icon.svg" type="image/svg+xml">
+    <link rel="apple-touch-icon" href="icon-180.png">
+    
+    <!-- Open Graph and Twitter Card meta tags -->
+    <meta property="og:title" content="Mastodon Digest - 10 Hours">
+    <meta property="og:description" content="Popular posts from the past 10 hours using extendedsimpleweighted scoring and normal threshold.">
+    <meta property="og:type" content="website">
+    
+    <!-- Performance and security -->
+    <meta http-equiv="X-Content-Type-Options" content="nosniff">
+    <meta name="referrer" content="strict-origin-when-cross-origin">
+</head>
+
+<body>
+    <!-- Skip navigation for screen readers -->
+    <a href="#main-content" class="sr-only">Skip to main content</a>
+    
+    <div id="container">
+        <main class="blocks" id="main-content">
+            
+            <header class="header" role="banner">
+                <h1 class="title">Mastodon Digest</h1>
+                
+                <div class="run_time date" 
+                     data-date="2025-08-25T08:10:10.322786Z" 
+                     aria-label="Digest generated time"
+                     role="status">
+                </div>
+                
+                <div class="run_score" 
+                     aria-label="Digest parameters"
+                     role="group">
+                    <div>
+                        <span class="meta_desc">for the past</span>
+                        <span class="meta_data">10 hours</span>
+                    </div>
+                    <div>
+                        <span class="meta_data">extendedsimpleweighted</span>
+                        <span class="meta_desc">scorer</span>
+                    </div>
+                    <div>
+                        <span class="meta_data">normal</span>
+                        <span class="meta_desc">threshold</span>
+                    </div>
+                </div>
+                
+                <!-- Keyboard shortcuts help -->
+                <details class="help-section">
+                    <summary class="help-toggle">Keyboard Shortcuts</summary>
+                    <div class="help-content">
+                        <ul>
+                            <li><kbd>J</kbd> or <kbd>↓</kbd> - Next post</li>
+                            <li><kbd>K</kbd> or <kbd>↑</kbd> - Previous post</li>
+                            <li><kbd>O</kbd> or <kbd>Enter</kbd> - Open original</li>
+                            <li><kbd>H</kbd> - Open home instance</li>
+                        </ul>
+                    </div>
+                </details>
+            </header>
+
+            <section class="stream" aria-labelledby="posts-heading">
+                <h2 id="posts-heading" class="stream_title">
+                    <span>Posts</span>
+                </h2>
+                <div class="posts" 
+                     role="feed" 
+                     aria-label="Popular posts from your timeline"
+                     aria-live="polite">
+                    
+                        <article class="post" 
+         role="article" 
+         data-post-id=""
+         tabindex="0"
+         aria-labelledby="post-author-unknown"
+         aria-describedby="post-content-unknown post-meta-unknown">
+
+    <div class="status">
+        
+        <header class="post_header">
+            <div class="user" 
+                 role="group" 
+                 aria-label="Post author information"
+                 id="post-author-unknown">
+
+                <div class="avatar">
+                    <a href="https://hachyderm.io/@jarvisscript" 
+                       target="_blank" 
+                       rel="noopener"
+                       aria-label="View Chris Jarvis <img alt=battery_full src="https://macawsocial.sfo3.cdn.digitaloceanspaces.com/cache/custom_emojis/images/000/094/314/original/c649c7fb1a6fbefb.png">'s profile">
+                        <img src="https://macawsocial.sfo3.cdn.digitaloceanspaces.com/cache/accounts/avatars/109/380/238/991/044/326/original/48665e7f758a6ddf.jpeg" 
+                             alt="" 
+                             role="presentation"
+                             loading="lazy"
+                             decoding="async">
+                    </a>
+                </div>
+            
+                <a href="https://hachyderm.io/@jarvisscript" 
+                   target="_blank" 
+                   rel="noopener"
+                   class="user-link"
+                   aria-label="View profile of Chris Jarvis <img alt=battery_full src="https://macawsocial.sfo3.cdn.digitaloceanspaces.com/cache/custom_emojis/images/000/094/314/original/c649c7fb1a6fbefb.png">, username jarvisscript">
+                    <span class="displayname">Chris Jarvis <img alt=battery_full src="https://macawsocial.sfo3.cdn.digitaloceanspaces.com/cache/custom_emojis/images/000/094/314/original/c649c7fb1a6fbefb.png"></span>
+                    <span class="username">@jarvisscript</span>
+                </a>
+
+            </div>
+
+            <nav class="links" 
+                 aria-label="Post actions"
+                 role="group">
+                <a href="https://macaw.social/@jarvisscript@hachyderm.io/115086862925760138" target="_blank" rel="noopener">home</a>
+                <a href="https://hachyderm.io/@jarvisscript/115086862864493186" target="_blank" rel="noopener">original</a>
+            </nav>
+
+        </header>
+          
+        <div class="post_content">
+            <div class="content" 
+                 id="post-content-unknown"
+                 role="main"
+                 aria-label="Post content">
+                <p><a href="https://hachyderm.io/tags/Wordle" class="mention hashtag" rel="nofollow noopener" target="_blank">#<span>Wordle</span></a> 1,527 4/6</p><p>🟨🟨⬛⬛🟩<br>⬛🟨🟩⬛🟩<br>🟩⬛🟩🟩🟩<br>🟩🟩🟩🟩🟩</p>
+            </div>
+
+            
+        </div>
+
+        <footer class="post_footer" 
+                id="post-meta-unknown"
+                role="contentinfo">
+
+            <time class="published date" 
+                  data-date="2025-08-25T01:42:44+00:00"
+                  datetime="2025-08-25T01:42:44+00:00"
+                  aria-label="Posted at 2025-08-25T01:42:44+00:00">
+                <!-- JavaScript will populate this -->
+            </time>
+            
+            <div class="reactions" 
+                 role="group" 
+                 aria-label="Engagement metrics">
+                <span aria-label="2 replies"
+                      role="img"
+                      title="Replies">
+                    <span aria-hidden="true">⥄</span>
+                    <span class="count">2</span>
+                </span>
+                <span aria-label="0 boosts"
+                      role="img"
+                      title="Boosts">
+                    <span aria-hidden="true">↻</span>
+                    <span class="count">0</span>
+                </span>
+                <span aria-label="0 favorites"
+                      role="img"
+                      title="Favorites">
+                    <span aria-hidden="true">★</span>
+                    <span class="count">0</span>
+                </span>
+            </div>
+            
+        </footer>
+        
+    </div>
+
+</article>
+                    
+                        <article class="post" 
+         role="article" 
+         data-post-id=""
+         tabindex="0"
+         aria-labelledby="post-author-unknown"
+         aria-describedby="post-content-unknown post-meta-unknown">
+
+    <div class="status">
+        
+        <header class="post_header">
+            <div class="user" 
+                 role="group" 
+                 aria-label="Post author information"
+                 id="post-author-unknown">
+
+                <div class="avatar">
+                    <a href="https://pc.cafe/@fedicat" 
+                       target="_blank" 
+                       rel="noopener"
+                       aria-label="View fedicat's profile">
+                        <img src="https://macawsocial.sfo3.cdn.digitaloceanspaces.com/cache/accounts/avatars/112/629/777/681/861/557/original/9c1fdcf05e355b3f.jpeg" 
+                             alt="" 
+                             role="presentation"
+                             loading="lazy"
+                             decoding="async">
+                    </a>
+                </div>
+            
+                <a href="https://pc.cafe/@fedicat" 
+                   target="_blank" 
+                   rel="noopener"
+                   class="user-link"
+                   aria-label="View profile of fedicat, username fedicat">
+                    <span class="displayname">fedicat</span>
+                    <span class="username">@fedicat</span>
+                </a>
+
+            </div>
+
+            <nav class="links" 
+                 aria-label="Post actions"
+                 role="group">
+                <a href="https://macaw.social/@fedicat@pc.cafe/115086966277845545" target="_blank" rel="noopener">home</a>
+                <a href="https://pc.cafe/@fedicat/115086963146653638" target="_blank" rel="noopener">original</a>
+            </nav>
+
+        </header>
+          
+        <div class="post_content">
+            <div class="content" 
+                 id="post-content-unknown"
+                 role="main"
+                 aria-label="Post content">
+                <p>testing <a href="https://pc.cafe/tags/Fedicat" class="mention hashtag" rel="nofollow noopener" target="_blank">#<span>Fedicat</span></a> thread view on <a href="https://pc.cafe/tags/monsterdon" class="mention hashtag" rel="nofollow noopener" target="_blank">#<span>monsterdon</span></a></p>
+            </div>
+
+            
+            <div class="medias" 
+                 role="group" 
+                 aria-label="Media attachments">
+                <div class="media"><img src="https://macawsocial.sfo3.cdn.digitaloceanspaces.com/cache/media_attachments/files/115/086/966/242/180/920/original/3e884c3939bc33e5.jpeg" alt="screenshot of a monsterdon thread
+
+Begin detected text:
+
+8:06< HomeThreadSad Swap thing, bum duh bum,Ip. You make my heart sing, whoa ohIp. You make everyyyyyything groovvvyyyyy#monsterdon#MonsterdonSo now we're just creating random glowingexplosives, what is this lab even#monsterdon#MonsterdonDude, the quantity of food we can produce hasnever been the problem in modern times, it'swho we won't let have it#monsterdon#MonsterdonExploding plant growth formula that also makesyou horny what else does this stuff do#monsterdon#Monsterdon
+
+End of detected text"></div>
+            </div>
+            
+        </div>
+
+        <footer class="post_footer" 
+                id="post-meta-unknown"
+                role="contentinfo">
+
+            <time class="published date" 
+                  data-date="2025-08-25T02:08:14+00:00"
+                  datetime="2025-08-25T02:08:14+00:00"
+                  aria-label="Posted at 2025-08-25T02:08:14+00:00">
+                <!-- JavaScript will populate this -->
+            </time>
+            
+            <div class="reactions" 
+                 role="group" 
+                 aria-label="Engagement metrics">
+                <span aria-label="0 replies"
+                      role="img"
+                      title="Replies">
+                    <span aria-hidden="true">⥄</span>
+                    <span class="count">0</span>
+                </span>
+                <span aria-label="1 boosts"
+                      role="img"
+                      title="Boosts">
+                    <span aria-hidden="true">↻</span>
+                    <span class="count">1</span>
+                </span>
+                <span aria-label="0 favorites"
+                      role="img"
+                      title="Favorites">
+                    <span aria-hidden="true">★</span>
+                    <span class="count">0</span>
+                </span>
+            </div>
+            
+        </footer>
+        
+    </div>
+
+</article>
+                    
+                        <article class="post" 
+         role="article" 
+         data-post-id=""
+         tabindex="0"
+         aria-labelledby="post-author-unknown"
+         aria-describedby="post-content-unknown post-meta-unknown">
+
+    <div class="status">
+        
+        <header class="post_header">
+            <div class="user" 
+                 role="group" 
+                 aria-label="Post author information"
+                 id="post-author-unknown">
+
+                <div class="avatar">
+                    <a href="https://mastodon.social/@loganer" 
+                       target="_blank" 
+                       rel="noopener"
+                       aria-label="View 👽🐦🦇🐉💻's profile">
+                        <img src="https://macawsocial.sfo3.cdn.digitaloceanspaces.com/cache/accounts/avatars/112/059/733/215/231/736/original/31da12885bb7c8eb.jpeg" 
+                             alt="" 
+                             role="presentation"
+                             loading="lazy"
+                             decoding="async">
+                    </a>
+                </div>
+            
+                <a href="https://mastodon.social/@loganer" 
+                   target="_blank" 
+                   rel="noopener"
+                   class="user-link"
+                   aria-label="View profile of 👽🐦🦇🐉💻, username loganer">
+                    <span class="displayname">👽🐦🦇🐉💻</span>
+                    <span class="username">@loganer</span>
+                </a>
+
+            </div>
+
+            <nav class="links" 
+                 aria-label="Post actions"
+                 role="group">
+                <a href="https://macaw.social/@loganer@mastodon.social/115087146319958777" target="_blank" rel="noopener">home</a>
+                <a href="https://mastodon.social/@loganer/115087146301024773" target="_blank" rel="noopener">original</a>
+            </nav>
+
+        </header>
+          
+        <div class="post_content">
+            <div class="content" 
+                 id="post-content-unknown"
+                 role="main"
+                 aria-label="Post content">
+                <p><a href="https://mastodon.social/tags/Activitypub" class="mention hashtag" rel="nofollow noopener" target="_blank">#<span>Activitypub</span></a> <a href="https://mastodon.social/tags/Curious" class="mention hashtag" rel="nofollow noopener" target="_blank">#<span>Curious</span></a> ...</p><p>just curious, wondering why did activitypub use json and not something more closer to html (such as xml)?</p>
+            </div>
+
+            
+        </div>
+
+        <footer class="post_footer" 
+                id="post-meta-unknown"
+                role="contentinfo">
+
+            <time class="published date" 
+                  data-date="2025-08-25T02:54:49+00:00"
+                  datetime="2025-08-25T02:54:49+00:00"
+                  aria-label="Posted at 2025-08-25T02:54:49+00:00">
+                <!-- JavaScript will populate this -->
+            </time>
+            
+            <div class="reactions" 
+                 role="group" 
+                 aria-label="Engagement metrics">
+                <span aria-label="1 replies"
+                      role="img"
+                      title="Replies">
+                    <span aria-hidden="true">⥄</span>
+                    <span class="count">1</span>
+                </span>
+                <span aria-label="0 boosts"
+                      role="img"
+                      title="Boosts">
+                    <span aria-hidden="true">↻</span>
+                    <span class="count">0</span>
+                </span>
+                <span aria-label="0 favorites"
+                      role="img"
+                      title="Favorites">
+                    <span aria-hidden="true">★</span>
+                    <span class="count">0</span>
+                </span>
+            </div>
+            
+        </footer>
+        
+    </div>
+
+</article>
+                    
+                        <article class="post" 
+         role="article" 
+         data-post-id=""
+         tabindex="0"
+         aria-labelledby="post-author-unknown"
+         aria-describedby="post-content-unknown post-meta-unknown">
+
+    <div class="status">
+        
+        <header class="post_header">
+            <div class="user" 
+                 role="group" 
+                 aria-label="Post author information"
+                 id="post-author-unknown">
+
+                <div class="avatar">
+                    <a href="https://mastodon.social/@endlessblue" 
+                       target="_blank" 
+                       rel="noopener"
+                       aria-label="View Endless Blue's profile">
+                        <img src="https://macawsocial.sfo3.cdn.digitaloceanspaces.com/cache/accounts/avatars/109/365/413/925/577/487/original/789e8298c0c9d0ef.jpg" 
+                             alt="" 
+                             role="presentation"
+                             loading="lazy"
+                             decoding="async">
+                    </a>
+                </div>
+            
+                <a href="https://mastodon.social/@endlessblue" 
+                   target="_blank" 
+                   rel="noopener"
+                   class="user-link"
+                   aria-label="View profile of Endless Blue, username endlessblue">
+                    <span class="displayname">Endless Blue</span>
+                    <span class="username">@endlessblue</span>
+                </a>
+
+            </div>
+
+            <nav class="links" 
+                 aria-label="Post actions"
+                 role="group">
+                <a href="https://macaw.social/@endlessblue@mastodon.social/115087398253465994" target="_blank" rel="noopener">home</a>
+                <a href="https://mastodon.social/@endlessblue/115087398199084620" target="_blank" rel="noopener">original</a>
+            </nav>
+
+        </header>
+          
+        <div class="post_content">
+            <div class="content" 
+                 id="post-content-unknown"
+                 role="main"
+                 aria-label="Post content">
+                <p>Had a really good idea for a blog series, sat down to write and… realized I just don’t enjoy writing all that much. I can do it, but it would be work, and I already have like five jobs. So no, sadly you will not get my hot substack takes</p>
+            </div>
+
+            
+        </div>
+
+        <footer class="post_footer" 
+                id="post-meta-unknown"
+                role="contentinfo">
+
+            <time class="published date" 
+                  data-date="2025-08-25T03:58:52+00:00"
+                  datetime="2025-08-25T03:58:52+00:00"
+                  aria-label="Posted at 2025-08-25T03:58:52+00:00">
+                <!-- JavaScript will populate this -->
+            </time>
+            
+            <div class="reactions" 
+                 role="group" 
+                 aria-label="Engagement metrics">
+                <span aria-label="1 replies"
+                      role="img"
+                      title="Replies">
+                    <span aria-hidden="true">⥄</span>
+                    <span class="count">1</span>
+                </span>
+                <span aria-label="0 boosts"
+                      role="img"
+                      title="Boosts">
+                    <span aria-hidden="true">↻</span>
+                    <span class="count">0</span>
+                </span>
+                <span aria-label="0 favorites"
+                      role="img"
+                      title="Favorites">
+                    <span aria-hidden="true">★</span>
+                    <span class="count">0</span>
+                </span>
+            </div>
+            
+        </footer>
+        
+    </div>
+
+</article>
+                    
+                        <article class="post" 
+         role="article" 
+         data-post-id=""
+         tabindex="0"
+         aria-labelledby="post-author-unknown"
+         aria-describedby="post-content-unknown post-meta-unknown">
+
+    <div class="status">
+        
+        <header class="post_header">
+            <div class="user" 
+                 role="group" 
+                 aria-label="Post author information"
+                 id="post-author-unknown">
+
+                <div class="avatar">
+                    <a href="https://mastodon.sdf.org/@mbbrutman" 
+                       target="_blank" 
+                       rel="noopener"
+                       aria-label="View mbbrutman's profile">
+                        <img src="https://macawsocial.sfo3.cdn.digitaloceanspaces.com/cache/accounts/avatars/113/245/977/332/049/004/original/cd481573c75c5d62.jpg" 
+                             alt="" 
+                             role="presentation"
+                             loading="lazy"
+                             decoding="async">
+                    </a>
+                </div>
+            
+                <a href="https://mastodon.sdf.org/@mbbrutman" 
+                   target="_blank" 
+                   rel="noopener"
+                   class="user-link"
+                   aria-label="View profile of mbbrutman, username mbbrutman">
+                    <span class="displayname">mbbrutman</span>
+                    <span class="username">@mbbrutman</span>
+                </a>
+
+            </div>
+
+            <nav class="links" 
+                 aria-label="Post actions"
+                 role="group">
+                <a href="https://macaw.social/@mbbrutman@mastodon.sdf.org/115087474344386177" target="_blank" rel="noopener">home</a>
+                <a href="https://mastodon.sdf.org/@mbbrutman/115087474313612562" target="_blank" rel="noopener">original</a>
+            </nav>
+
+        </header>
+          
+        <div class="post_content">
+            <div class="content" 
+                 id="post-content-unknown"
+                 role="main"
+                 aria-label="Post content">
+                <p>This is the proper use of an old low-end printer that uses thermal fax paper on a roll.</p><p><a href="https://mastodon.sdf.org/tags/retrocomputing" class="mention hashtag" rel="nofollow noopener" target="_blank">#<span>retrocomputing</span></a></p>
+            </div>
+
+            
+            <div class="medias" 
+                 role="group" 
+                 aria-label="Media attachments">
+                <div class="media"><img src="https://macawsocial.sfo3.cdn.digitaloceanspaces.com/cache/media_attachments/files/115/087/857/180/252/673/original/c51ba595e3fee7b0.jpg" alt="A scene from The Blues Brothers printed on an IBM 5181 thermal printer."></div>
+            </div>
+            
+        </div>
+
+        <footer class="post_footer" 
+                id="post-meta-unknown"
+                role="contentinfo">
+
+            <time class="published date" 
+                  data-date="2025-08-25T04:18:14+00:00"
+                  datetime="2025-08-25T04:18:14+00:00"
+                  aria-label="Posted at 2025-08-25T04:18:14+00:00">
+                <!-- JavaScript will populate this -->
+            </time>
+            
+            <div class="reactions" 
+                 role="group" 
+                 aria-label="Engagement metrics">
+                <span aria-label="0 replies"
+                      role="img"
+                      title="Replies">
+                    <span aria-hidden="true">⥄</span>
+                    <span class="count">0</span>
+                </span>
+                <span aria-label="2 boosts"
+                      role="img"
+                      title="Boosts">
+                    <span aria-hidden="true">↻</span>
+                    <span class="count">2</span>
+                </span>
+                <span aria-label="0 favorites"
+                      role="img"
+                      title="Favorites">
+                    <span aria-hidden="true">★</span>
+                    <span class="count">0</span>
+                </span>
+            </div>
+            
+        </footer>
+        
+    </div>
+
+</article>
+                    
+                        <article class="post" 
+         role="article" 
+         data-post-id=""
+         tabindex="0"
+         aria-labelledby="post-author-unknown"
+         aria-describedby="post-content-unknown post-meta-unknown">
+
+    <div class="status">
+        
+        <header class="post_header">
+            <div class="user" 
+                 role="group" 
+                 aria-label="Post author information"
+                 id="post-author-unknown">
+
+                <div class="avatar">
+                    <a href="https://kind.social/@Shards" 
+                       target="_blank" 
+                       rel="noopener"
+                       aria-label="View Shards System's profile">
+                        <img src="https://macawsocial.sfo3.cdn.digitaloceanspaces.com/cache/accounts/avatars/109/433/259/364/665/301/original/ae6bcfb3ead0ea9b.png" 
+                             alt="" 
+                             role="presentation"
+                             loading="lazy"
+                             decoding="async">
+                    </a>
+                </div>
+            
+                <a href="https://kind.social/@Shards" 
+                   target="_blank" 
+                   rel="noopener"
+                   class="user-link"
+                   aria-label="View profile of Shards System, username Shards">
+                    <span class="displayname">Shards System</span>
+                    <span class="username">@Shards</span>
+                </a>
+
+            </div>
+
+            <nav class="links" 
+                 aria-label="Post actions"
+                 role="group">
+                <a href="https://macaw.social/@Shards@kind.social/115087646281215484" target="_blank" rel="noopener">home</a>
+                <a href="https://kind.social/@Shards/115087646225053170" target="_blank" rel="noopener">original</a>
+            </nav>
+
+        </header>
+          
+        <div class="post_content">
+            <div class="content" 
+                 id="post-content-unknown"
+                 role="main"
+                 aria-label="Post content">
+                <p>👻<br>Decided to revisit a podcast I listened to a few years back, where they would fanfiction their version of movies. Long story short, I’m now working on my idea of a better (or at least more interesting) Star Wars prequel trilogy, because I definitely need more creative plates to spin. 😅</p>
+            </div>
+
+            
+        </div>
+
+        <footer class="post_footer" 
+                id="post-meta-unknown"
+                role="contentinfo">
+
+            <time class="published date" 
+                  data-date="2025-08-25T05:01:57+00:00"
+                  datetime="2025-08-25T05:01:57+00:00"
+                  aria-label="Posted at 2025-08-25T05:01:57+00:00">
+                <!-- JavaScript will populate this -->
+            </time>
+            
+            <div class="reactions" 
+                 role="group" 
+                 aria-label="Engagement metrics">
+                <span aria-label="1 replies"
+                      role="img"
+                      title="Replies">
+                    <span aria-hidden="true">⥄</span>
+                    <span class="count">1</span>
+                </span>
+                <span aria-label="0 boosts"
+                      role="img"
+                      title="Boosts">
+                    <span aria-hidden="true">↻</span>
+                    <span class="count">0</span>
+                </span>
+                <span aria-label="0 favorites"
+                      role="img"
+                      title="Favorites">
+                    <span aria-hidden="true">★</span>
+                    <span class="count">0</span>
+                </span>
+            </div>
+            
+        </footer>
+        
+    </div>
+
+</article>
+                    
+                        <article class="post" 
+         role="article" 
+         data-post-id=""
+         tabindex="0"
+         aria-labelledby="post-author-unknown"
+         aria-describedby="post-content-unknown post-meta-unknown">
+
+    <div class="status">
+        
+        <header class="post_header">
+            <div class="user" 
+                 role="group" 
+                 aria-label="Post author information"
+                 id="post-author-unknown">
+
+                <div class="avatar">
+                    <a href="https://toot.community/@mijndert" 
+                       target="_blank" 
+                       rel="noopener"
+                       aria-label="View Mijndert's profile">
+                        <img src="https://macawsocial.sfo3.cdn.digitaloceanspaces.com/cache/accounts/avatars/111/444/081/093/974/014/original/15fa4a268b8f3046.png" 
+                             alt="" 
+                             role="presentation"
+                             loading="lazy"
+                             decoding="async">
+                    </a>
+                </div>
+            
+                <a href="https://toot.community/@mijndert" 
+                   target="_blank" 
+                   rel="noopener"
+                   class="user-link"
+                   aria-label="View profile of Mijndert, username mijndert">
+                    <span class="displayname">Mijndert</span>
+                    <span class="username">@mijndert</span>
+                </a>
+
+            </div>
+
+            <nav class="links" 
+                 aria-label="Post actions"
+                 role="group">
+                <a href="https://macaw.social/@mijndert@toot.community/115087639633373754" target="_blank" rel="noopener">home</a>
+                <a href="https://toot.community/@mijndert/115087639431018235" target="_blank" rel="noopener">original</a>
+            </nav>
+
+        </header>
+          
+        <div class="post_content">
+            <div class="content" 
+                 id="post-content-unknown"
+                 role="main"
+                 aria-label="Post content">
+                <p>What's with these translated video titles on youtube? Who wants to see the title of a video being translated into Dutch (in my case)? It makes youtube look sloppy.</p>
+            </div>
+
+            
+        </div>
+
+        <footer class="post_footer" 
+                id="post-meta-unknown"
+                role="contentinfo">
+
+            <time class="published date" 
+                  data-date="2025-08-25T05:00:13+00:00"
+                  datetime="2025-08-25T05:00:13+00:00"
+                  aria-label="Posted at 2025-08-25T05:00:13+00:00">
+                <!-- JavaScript will populate this -->
+            </time>
+            
+            <div class="reactions" 
+                 role="group" 
+                 aria-label="Engagement metrics">
+                <span aria-label="1 replies"
+                      role="img"
+                      title="Replies">
+                    <span aria-hidden="true">⥄</span>
+                    <span class="count">1</span>
+                </span>
+                <span aria-label="0 boosts"
+                      role="img"
+                      title="Boosts">
+                    <span aria-hidden="true">↻</span>
+                    <span class="count">0</span>
+                </span>
+                <span aria-label="0 favorites"
+                      role="img"
+                      title="Favorites">
+                    <span aria-hidden="true">★</span>
+                    <span class="count">0</span>
+                </span>
+            </div>
+            
+        </footer>
+        
+    </div>
+
+</article>
+                    
+                        <article class="post" 
+         role="article" 
+         data-post-id=""
+         tabindex="0"
+         aria-labelledby="post-author-unknown"
+         aria-describedby="post-content-unknown post-meta-unknown">
+
+    <div class="status">
+        
+        <header class="post_header">
+            <div class="user" 
+                 role="group" 
+                 aria-label="Post author information"
+                 id="post-author-unknown">
+
+                <div class="avatar">
+                    <a href="https://mastodon.social/@megus_music" 
+                       target="_blank" 
+                       rel="noopener"
+                       aria-label="View Megus's profile">
+                        <img src="https://macawsocial.sfo3.cdn.digitaloceanspaces.com/cache/accounts/avatars/113/479/625/288/927/553/original/6701ee0017cff5f1.jpg" 
+                             alt="" 
+                             role="presentation"
+                             loading="lazy"
+                             decoding="async">
+                    </a>
+                </div>
+            
+                <a href="https://mastodon.social/@megus_music" 
+                   target="_blank" 
+                   rel="noopener"
+                   class="user-link"
+                   aria-label="View profile of Megus, username megus_music">
+                    <span class="displayname">Megus</span>
+                    <span class="username">@megus_music</span>
+                </a>
+
+            </div>
+
+            <nav class="links" 
+                 aria-label="Post actions"
+                 role="group">
+                <a href="https://macaw.social/@megus_music@mastodon.social/115087768844924410" target="_blank" rel="noopener">home</a>
+                <a href="https://mastodon.social/@megus_music/115087768812523795" target="_blank" rel="noopener">original</a>
+            </nav>
+
+        </header>
+          
+        <div class="post_content">
+            <div class="content" 
+                 id="post-content-unknown"
+                 role="main"
+                 aria-label="Post content">
+                <p>Preparing for the album release is not a reason to stop uploading my old <a href="https://mastodon.social/tags/chiptune" class="mention hashtag" rel="nofollow noopener" target="_blank">#<span>chiptune</span></a> music to YouTube. I wrote Summer Mood in 2001 and I still consider it my best work on <a href="https://mastodon.social/tags/zxspectrum" class="mention hashtag" rel="nofollow noopener" target="_blank">#<span>zxspectrum</span></a>. youtu.be/lzAmjh34YXg</p>
+            </div>
+
+            
+        </div>
+
+        <footer class="post_footer" 
+                id="post-meta-unknown"
+                role="contentinfo">
+
+            <time class="published date" 
+                  data-date="2025-08-25T05:33:07+00:00"
+                  datetime="2025-08-25T05:33:07+00:00"
+                  aria-label="Posted at 2025-08-25T05:33:07+00:00">
+                <!-- JavaScript will populate this -->
+            </time>
+            
+            <div class="reactions" 
+                 role="group" 
+                 aria-label="Engagement metrics">
+                <span aria-label="1 replies"
+                      role="img"
+                      title="Replies">
+                    <span aria-hidden="true">⥄</span>
+                    <span class="count">1</span>
+                </span>
+                <span aria-label="0 boosts"
+                      role="img"
+                      title="Boosts">
+                    <span aria-hidden="true">↻</span>
+                    <span class="count">0</span>
+                </span>
+                <span aria-label="0 favorites"
+                      role="img"
+                      title="Favorites">
+                    <span aria-hidden="true">★</span>
+                    <span class="count">0</span>
+                </span>
+            </div>
+            
+        </footer>
+        
+    </div>
+
+</article>
+                    
+                        <article class="post" 
+         role="article" 
+         data-post-id=""
+         tabindex="0"
+         aria-labelledby="post-author-unknown"
+         aria-describedby="post-content-unknown post-meta-unknown">
+
+    <div class="status">
+        
+        <header class="post_header">
+            <div class="user" 
+                 role="group" 
+                 aria-label="Post author information"
+                 id="post-author-unknown">
+
+                <div class="avatar">
+                    <a href="https://fosstodon.org/@matt_trentini" 
+                       target="_blank" 
+                       rel="noopener"
+                       aria-label="View Matt Trentini's profile">
+                        <img src="https://macawsocial.sfo3.cdn.digitaloceanspaces.com/cache/accounts/avatars/109/364/689/326/459/380/original/37a9c8561b89dff9.jpg" 
+                             alt="" 
+                             role="presentation"
+                             loading="lazy"
+                             decoding="async">
+                    </a>
+                </div>
+            
+                <a href="https://fosstodon.org/@matt_trentini" 
+                   target="_blank" 
+                   rel="noopener"
+                   class="user-link"
+                   aria-label="View profile of Matt Trentini, username matt_trentini">
+                    <span class="displayname">Matt Trentini</span>
+                    <span class="username">@matt_trentini</span>
+                </a>
+
+            </div>
+
+            <nav class="links" 
+                 aria-label="Post actions"
+                 role="group">
+                <a href="https://macaw.social/@matt_trentini@fosstodon.org/115088043585245757" target="_blank" rel="noopener">home</a>
+                <a href="https://fosstodon.org/@matt_trentini/115088043524519415" target="_blank" rel="noopener">original</a>
+            </nav>
+
+        </header>
+          
+        <div class="post_content">
+            <div class="content" 
+                 id="post-content-unknown"
+                 role="main"
+                 aria-label="Post content">
+                <p><span class="h-card" translate="no"><a href="https://exquisite.social/@rqm" class="u-url mention" rel="nofollow noopener" target="_blank">@<span>rqm</span></a></span> Support for the hall effect sensor was removed from Espressif's IDF in version 5:</p><p><a href="https://docs.espressif.com/projects/esp-idf/en/stable/esp32s3/migration-guides/release-5.x/5.0/peripherals.html#api-changes" rel="nofollow noopener" translate="no" target="_blank"><span class="invisible">https://</span><span class="ellipsis">docs.espressif.com/projects/es</span><span class="invisible">p-idf/en/stable/esp32s3/migration-guides/release-5.x/5.0/peripherals.html#api-changes</span></a></p><p>And, consequently, it was removed from MicroPython by v1.20 in this commit:</p><p><a href="https://github.com/micropython/micropython/commit/2af229c3cc55ceefc4cfba0f50092af725c3bfa9" rel="nofollow noopener" translate="no" target="_blank"><span class="invisible">https://</span><span class="ellipsis">github.com/micropython/micropy</span><span class="invisible">thon/commit/2af229c3cc55ceefc4cfba0f50092af725c3bfa9</span></a></p><p>Hope that helps! BTW the built-in hall effect sensor didn't perform very well anyway... 😜</p>
+            </div>
+
+            
+        </div>
+
+        <footer class="post_footer" 
+                id="post-meta-unknown"
+                role="contentinfo">
+
+            <time class="published date" 
+                  data-date="2025-08-25T06:42:59+00:00"
+                  datetime="2025-08-25T06:42:59+00:00"
+                  aria-label="Posted at 2025-08-25T06:42:59+00:00">
+                <!-- JavaScript will populate this -->
+            </time>
+            
+            <div class="reactions" 
+                 role="group" 
+                 aria-label="Engagement metrics">
+                <span aria-label="0 replies"
+                      role="img"
+                      title="Replies">
+                    <span aria-hidden="true">⥄</span>
+                    <span class="count">0</span>
+                </span>
+                <span aria-label="1 boosts"
+                      role="img"
+                      title="Boosts">
+                    <span aria-hidden="true">↻</span>
+                    <span class="count">1</span>
+                </span>
+                <span aria-label="0 favorites"
+                      role="img"
+                      title="Favorites">
+                    <span aria-hidden="true">★</span>
+                    <span class="count">0</span>
+                </span>
+            </div>
+            
+        </footer>
+        
+    </div>
+
+</article>
+                    
+                        <article class="post" 
+         role="article" 
+         data-post-id=""
+         tabindex="0"
+         aria-labelledby="post-author-unknown"
+         aria-describedby="post-content-unknown post-meta-unknown">
+
+    <div class="status">
+        
+        <header class="post_header">
+            <div class="user" 
+                 role="group" 
+                 aria-label="Post author information"
+                 id="post-author-unknown">
+
+                <div class="avatar">
+                    <a href="https://mastodon.scot/@KenLussey" 
+                       target="_blank" 
+                       rel="noopener"
+                       aria-label="View Ken Lussey's profile">
+                        <img src="https://macawsocial.sfo3.cdn.digitaloceanspaces.com/cache/accounts/avatars/109/438/426/431/921/461/original/59007d64bf2b16d7.jpg" 
+                             alt="" 
+                             role="presentation"
+                             loading="lazy"
+                             decoding="async">
+                    </a>
+                </div>
+            
+                <a href="https://mastodon.scot/@KenLussey" 
+                   target="_blank" 
+                   rel="noopener"
+                   class="user-link"
+                   aria-label="View profile of Ken Lussey, username KenLussey">
+                    <span class="displayname">Ken Lussey</span>
+                    <span class="username">@KenLussey</span>
+                </a>
+
+            </div>
+
+            <nav class="links" 
+                 aria-label="Post actions"
+                 role="group">
+                <a href="https://macaw.social/@KenLussey@mastodon.scot/115088071690953048" target="_blank" rel="noopener">home</a>
+                <a href="https://mastodon.scot/@KenLussey/115088071684325554" target="_blank" rel="noopener">original</a>
+            </nav>
+
+        </header>
+          
+        <div class="post_content">
+            <div class="content" 
+                 id="post-content-unknown"
+                 role="main"
+                 aria-label="Post content">
+                <p>When the hunter becomes the prey. ‘The High Road’ is a fast-paced contemporary thriller set mainly in central Scotland and the far north-west. </p><p>Sandwood Cottage, near Sandwood Bay in Sutherland, has an important part to play as the story builds towards its climax. The cottage is seen here before the far end collapsed and the rest was fenced off on safety grounds.</p><p>Find out more on my website:<br><a href="https://www.kenlussey.com/thr/index.html" rel="nofollow noopener" translate="no" target="_blank"><span class="invisible">https://www.</span><span class="">kenlussey.com/thr/index.html</span><span class="invisible"></span></a></p><p><a href="https://mastodon.scot/tags/Books" class="mention hashtag" rel="nofollow noopener" target="_blank">#<span>Books</span></a> <a href="https://mastodon.scot/tags/Bookstodon" class="mention hashtag" rel="nofollow noopener" target="_blank">#<span>Bookstodon</span></a></p>
+            </div>
+
+            
+            <div class="medias" 
+                 role="group" 
+                 aria-label="Media attachments">
+                <div class="media"><img src="https://macawsocial.sfo3.cdn.digitaloceanspaces.com/cache/media_attachments/files/115/088/075/567/214/509/original/5e24c70332187d53.jpg" alt="The image shows a view down a slope to a broad glen with a large loch in it. On the far side rough ground climbs to the hilly skyline. On the down slope in the foreground, some distance from the viewer, is a roofless cottage comprising two gable ends and an internal divider, with window openings. It faces across the glen to the left. The scene is in sunlight. The front cover of ‘The High Road’ is shown in the bottom right corner."></div>
+            </div>
+            
+        </div>
+
+        <footer class="post_footer" 
+                id="post-meta-unknown"
+                role="contentinfo">
+
+            <time class="published date" 
+                  data-date="2025-08-25T06:50:09+00:00"
+                  datetime="2025-08-25T06:50:09+00:00"
+                  aria-label="Posted at 2025-08-25T06:50:09+00:00">
+                <!-- JavaScript will populate this -->
+            </time>
+            
+            <div class="reactions" 
+                 role="group" 
+                 aria-label="Engagement metrics">
+                <span aria-label="0 replies"
+                      role="img"
+                      title="Replies">
+                    <span aria-hidden="true">⥄</span>
+                    <span class="count">0</span>
+                </span>
+                <span aria-label="1 boosts"
+                      role="img"
+                      title="Boosts">
+                    <span aria-hidden="true">↻</span>
+                    <span class="count">1</span>
+                </span>
+                <span aria-label="0 favorites"
+                      role="img"
+                      title="Favorites">
+                    <span aria-hidden="true">★</span>
+                    <span class="count">0</span>
+                </span>
+            </div>
+            
+        </footer>
+        
+    </div>
+
+</article>
+                    
+                        <article class="post" 
+         role="article" 
+         data-post-id=""
+         tabindex="0"
+         aria-labelledby="post-author-unknown"
+         aria-describedby="post-content-unknown post-meta-unknown">
+
+    <div class="status">
+        
+        <header class="post_header">
+            <div class="user" 
+                 role="group" 
+                 aria-label="Post author information"
+                 id="post-author-unknown">
+
+                <div class="avatar">
+                    <a href="https://mymath.rocks/timeline/" 
+                       target="_blank" 
+                       rel="noopener"
+                       aria-label="View Helge's profile">
+                        <img src="https://macawsocial.sfo3.cdn.digitaloceanspaces.com/cache/accounts/avatars/109/727/085/765/278/306/original/75c29b6e054bdfeb.png" 
+                             alt="" 
+                             role="presentation"
+                             loading="lazy"
+                             decoding="async">
+                    </a>
+                </div>
+            
+                <a href="https://mymath.rocks/timeline/" 
+                   target="_blank" 
+                   rel="noopener"
+                   class="user-link"
+                   aria-label="View profile of Helge, username helge">
+                    <span class="displayname">Helge</span>
+                    <span class="username">@helge</span>
+                </a>
+
+            </div>
+
+            <nav class="links" 
+                 aria-label="Post actions"
+                 role="group">
+                <a href="https://macaw.social/@helge@mymath.rocks/115088129281235198" target="_blank" rel="noopener">home</a>
+                <a href="https://mymath.rocks/objects/eef0415b-a297-406e-8e37-f66a9e3c93a8" target="_blank" rel="noopener">original</a>
+            </nav>
+
+        </header>
+          
+        <div class="post_content">
+            <div class="content" 
+                 id="post-content-unknown"
+                 role="main"
+                 aria-label="Post content">
+                <p>Good morning Fediverse.</p>
+<p>It's important that ActivityPub encourages anarchism. I mean nothing is better against mandatory age verification laws than anarchism.</p>
+
+            </div>
+
+            
+        </div>
+
+        <footer class="post_footer" 
+                id="post-meta-unknown"
+                role="contentinfo">
+
+            <time class="published date" 
+                  data-date="2025-08-25T07:04:45.870000+00:00"
+                  datetime="2025-08-25T07:04:45.870000+00:00"
+                  aria-label="Posted at 2025-08-25T07:04:45.870000+00:00">
+                <!-- JavaScript will populate this -->
+            </time>
+            
+            <div class="reactions" 
+                 role="group" 
+                 aria-label="Engagement metrics">
+                <span aria-label="0 replies"
+                      role="img"
+                      title="Replies">
+                    <span aria-hidden="true">⥄</span>
+                    <span class="count">0</span>
+                </span>
+                <span aria-label="1 boosts"
+                      role="img"
+                      title="Boosts">
+                    <span aria-hidden="true">↻</span>
+                    <span class="count">1</span>
+                </span>
+                <span aria-label="0 favorites"
+                      role="img"
+                      title="Favorites">
+                    <span aria-hidden="true">★</span>
+                    <span class="count">0</span>
+                </span>
+            </div>
+            
+        </footer>
+        
+    </div>
+
+</article>
+                    
+                        <article class="post" 
+         role="article" 
+         data-post-id=""
+         tabindex="0"
+         aria-labelledby="post-author-unknown"
+         aria-describedby="post-content-unknown post-meta-unknown">
+
+    <div class="status">
+        
+        <header class="post_header">
+            <div class="user" 
+                 role="group" 
+                 aria-label="Post author information"
+                 id="post-author-unknown">
+
+                <div class="avatar">
+                    <a href="https://social.wildeboer.net/@jwildeboer" 
+                       target="_blank" 
+                       rel="noopener"
+                       aria-label="View Jan Wildeboer 😷<img alt=krulorange src="https://macawsocial.sfo3.cdn.digitaloceanspaces.com/cache/custom_emojis/images/000/063/603/original/8be8b7489d3c8496.png">'s profile">
+                        <img src="https://macawsocial.sfo3.cdn.digitaloceanspaces.com/cache/accounts/avatars/109/304/062/045/972/845/original/575c87382fe6f03f.jpeg" 
+                             alt="" 
+                             role="presentation"
+                             loading="lazy"
+                             decoding="async">
+                    </a>
+                </div>
+            
+                <a href="https://social.wildeboer.net/@jwildeboer" 
+                   target="_blank" 
+                   rel="noopener"
+                   class="user-link"
+                   aria-label="View profile of Jan Wildeboer 😷<img alt=krulorange src="https://macawsocial.sfo3.cdn.digitaloceanspaces.com/cache/custom_emojis/images/000/063/603/original/8be8b7489d3c8496.png">, username jwildeboer">
+                    <span class="displayname">Jan Wildeboer 😷<img alt=krulorange src="https://macawsocial.sfo3.cdn.digitaloceanspaces.com/cache/custom_emojis/images/000/063/603/original/8be8b7489d3c8496.png"></span>
+                    <span class="username">@jwildeboer</span>
+                </a>
+
+            </div>
+
+            <nav class="links" 
+                 aria-label="Post actions"
+                 role="group">
+                <a href="https://macaw.social/@jwildeboer@social.wildeboer.net/115088152416342576" target="_blank" rel="noopener">home</a>
+                <a href="https://social.wildeboer.net/@jwildeboer/115088146942389672" target="_blank" rel="noopener">original</a>
+            </nav>
+
+        </header>
+          
+        <div class="post_content">
+            <div class="content" 
+                 id="post-content-unknown"
+                 role="main"
+                 aria-label="Post content">
+                <p>If you are bored with or wonder why I share so much technical stuff in bursts, let me explain. I am privileged. I can afford to run several servers and a cute homelab. I have 30+ years of experience with Linux and Free and Open Source Software. It is my belief that I must use my privilege to share as much as I can. Without paywalls. Without expecting or asking for credit. In the hope it encourages more people to do stuff The Open Way. In ways I can't imagine from my privileged position. 1/3</p>
+            </div>
+
+            
+        </div>
+
+        <footer class="post_footer" 
+                id="post-meta-unknown"
+                role="contentinfo">
+
+            <time class="published date" 
+                  data-date="2025-08-25T07:09:17+00:00"
+                  datetime="2025-08-25T07:09:17+00:00"
+                  aria-label="Posted at 2025-08-25T07:09:17+00:00">
+                <!-- JavaScript will populate this -->
+            </time>
+            
+            <div class="reactions" 
+                 role="group" 
+                 aria-label="Engagement metrics">
+                <span aria-label="1 replies"
+                      role="img"
+                      title="Replies">
+                    <span aria-hidden="true">⥄</span>
+                    <span class="count">1</span>
+                </span>
+                <span aria-label="10 boosts"
+                      role="img"
+                      title="Boosts">
+                    <span aria-hidden="true">↻</span>
+                    <span class="count">10</span>
+                </span>
+                <span aria-label="28 favorites"
+                      role="img"
+                      title="Favorites">
+                    <span aria-hidden="true">★</span>
+                    <span class="count">28</span>
+                </span>
+            </div>
+            
+        </footer>
+        
+    </div>
+
+</article>
+                    
+                        <article class="post" 
+         role="article" 
+         data-post-id=""
+         tabindex="0"
+         aria-labelledby="post-author-unknown"
+         aria-describedby="post-content-unknown post-meta-unknown">
+
+    <div class="status">
+        
+        <header class="post_header">
+            <div class="user" 
+                 role="group" 
+                 aria-label="Post author information"
+                 id="post-author-unknown">
+
+                <div class="avatar">
+                    <a href="https://mastodon.social/@dinotron" 
+                       target="_blank" 
+                       rel="noopener"
+                       aria-label="View Dean's profile">
+                        <img src="https://macawsocial.sfo3.cdn.digitaloceanspaces.com/cache/accounts/avatars/112/547/276/000/415/369/original/758a2039aa030b97.png" 
+                             alt="" 
+                             role="presentation"
+                             loading="lazy"
+                             decoding="async">
+                    </a>
+                </div>
+            
+                <a href="https://mastodon.social/@dinotron" 
+                   target="_blank" 
+                   rel="noopener"
+                   class="user-link"
+                   aria-label="View profile of Dean, username dinotron">
+                    <span class="displayname">Dean</span>
+                    <span class="username">@dinotron</span>
+                </a>
+
+            </div>
+
+            <nav class="links" 
+                 aria-label="Post actions"
+                 role="group">
+                <a href="https://macaw.social/@dinotron@mastodon.social/115088209269541556" target="_blank" rel="noopener">home</a>
+                <a href="https://mastodon.social/@dinotron/115088209232894149" target="_blank" rel="noopener">original</a>
+            </nav>
+
+        </header>
+          
+        <div class="post_content">
+            <div class="content" 
+                 id="post-content-unknown"
+                 role="main"
+                 aria-label="Post content">
+                <p>Kermit may have his issues being green, but I find it super!  My friends are all green with envy!</p><p><a href="https://mastodon.social/tags/eZ80" class="mention hashtag" rel="nofollow noopener" target="_blank">#<span>eZ80</span></a>, <a href="https://mastodon.social/tags/RCBus" class="mention hashtag" rel="nofollow noopener" target="_blank">#<span>RCBus</span></a> <a href="https://mastodon.social/tags/RC2014" class="mention hashtag" rel="nofollow noopener" target="_blank">#<span>RC2014</span></a> <a href="https://mastodon.social/tags/retrocomputing" class="mention hashtag" rel="nofollow noopener" target="_blank">#<span>retrocomputing</span></a></p>
+            </div>
+
+            
+            <div class="medias" 
+                 role="group" 
+                 aria-label="Media attachments">
+                <div class="media"><video src="https://macawsocial.sfo3.cdn.digitaloceanspaces.com/cache/media_attachments/files/115/088/212/305/563/176/original/c6df5d8ea9b6e7f3.mp4" controls width="100%"></video></div>
+            </div>
+            
+        </div>
+
+        <footer class="post_footer" 
+                id="post-meta-unknown"
+                role="contentinfo">
+
+            <time class="published date" 
+                  data-date="2025-08-25T07:25:08+00:00"
+                  datetime="2025-08-25T07:25:08+00:00"
+                  aria-label="Posted at 2025-08-25T07:25:08+00:00">
+                <!-- JavaScript will populate this -->
+            </time>
+            
+            <div class="reactions" 
+                 role="group" 
+                 aria-label="Engagement metrics">
+                <span aria-label="0 replies"
+                      role="img"
+                      title="Replies">
+                    <span aria-hidden="true">⥄</span>
+                    <span class="count">0</span>
+                </span>
+                <span aria-label="2 boosts"
+                      role="img"
+                      title="Boosts">
+                    <span aria-hidden="true">↻</span>
+                    <span class="count">2</span>
+                </span>
+                <span aria-label="0 favorites"
+                      role="img"
+                      title="Favorites">
+                    <span aria-hidden="true">★</span>
+                    <span class="count">0</span>
+                </span>
+            </div>
+            
+        </footer>
+        
+    </div>
+
+</article>
+                    
+                        <article class="post" 
+         role="article" 
+         data-post-id=""
+         tabindex="0"
+         aria-labelledby="post-author-unknown"
+         aria-describedby="post-content-unknown post-meta-unknown">
+
+    <div class="status">
+        
+        <header class="post_header">
+            <div class="user" 
+                 role="group" 
+                 aria-label="Post author information"
+                 id="post-author-unknown">
+
+                <div class="avatar">
+                    <a href="https://livellosegreto.it/@dailymsx" 
+                       target="_blank" 
+                       rel="noopener"
+                       aria-label="View The Daily MSX's profile">
+                        <img src="https://macawsocial.sfo3.cdn.digitaloceanspaces.com/cache/accounts/avatars/113/420/919/826/569/206/original/b5da7ff0ccf57a99.png" 
+                             alt="" 
+                             role="presentation"
+                             loading="lazy"
+                             decoding="async">
+                    </a>
+                </div>
+            
+                <a href="https://livellosegreto.it/@dailymsx" 
+                   target="_blank" 
+                   rel="noopener"
+                   class="user-link"
+                   aria-label="View profile of The Daily MSX, username dailymsx">
+                    <span class="displayname">The Daily MSX</span>
+                    <span class="username">@dailymsx</span>
+                </a>
+
+            </div>
+
+            <nav class="links" 
+                 aria-label="Post actions"
+                 role="group">
+                <a href="https://macaw.social/@dailymsx@livellosegreto.it/115088228909196146" target="_blank" rel="noopener">home</a>
+                <a href="https://livellosegreto.it/@dailymsx/115088228909461922" target="_blank" rel="noopener">original</a>
+            </nav>
+
+        </header>
+          
+        <div class="post_content">
+            <div class="content" 
+                 id="post-content-unknown"
+                 role="main"
+                 aria-label="Post content">
+                <p>Dig Dug<br>「ディグダグ」<br>(Namco, 1984)</p><p>🕹 Play online:<br><a href="https://www.file-hunter.com/MSX/?id=digdug" rel="nofollow noopener" translate="no" target="_blank"><span class="invisible">https://www.</span><span class="">file-hunter.com/MSX/?id=digdug</span><span class="invisible"></span></a></p><p>Dig Dug is a 1-2 player arcade game where you dig through the earth using a shovel, avoiding monsters. You can inflate them until they explode, squash them with rocks, or they turn into invincible ghosts. Collect vegetables for points.</p><p><a href="https://livellosegreto.it/tags/msx" class="mention hashtag" rel="nofollow noopener" target="_blank">#<span>msx</span></a> <a href="https://livellosegreto.it/tags/MSXGames" class="mention hashtag" rel="nofollow noopener" target="_blank">#<span>MSXGames</span></a> <a href="https://livellosegreto.it/tags/retrogaming" class="mention hashtag" rel="nofollow noopener" target="_blank">#<span>retrogaming</span></a> <a href="https://livellosegreto.it/tags/retrogames" class="mention hashtag" rel="nofollow noopener" target="_blank">#<span>retrogames</span></a><br>(Video: screenscraper.fr)</p>
+            </div>
+
+            
+            <div class="medias" 
+                 role="group" 
+                 aria-label="Media attachments">
+                <div class="media"><video src="https://macawsocial.sfo3.cdn.digitaloceanspaces.com/cache/media_attachments/files/115/088/234/839/299/594/original/1c7d7f03e0d47ad4.mp4" autoplay loop muted playsinline width="100%"></video></div>
+            </div>
+            
+        </div>
+
+        <footer class="post_footer" 
+                id="post-meta-unknown"
+                role="contentinfo">
+
+            <time class="published date" 
+                  data-date="2025-08-25T07:30:08+00:00"
+                  datetime="2025-08-25T07:30:08+00:00"
+                  aria-label="Posted at 2025-08-25T07:30:08+00:00">
+                <!-- JavaScript will populate this -->
+            </time>
+            
+            <div class="reactions" 
+                 role="group" 
+                 aria-label="Engagement metrics">
+                <span aria-label="1 replies"
+                      role="img"
+                      title="Replies">
+                    <span aria-hidden="true">⥄</span>
+                    <span class="count">1</span>
+                </span>
+                <span aria-label="1 boosts"
+                      role="img"
+                      title="Boosts">
+                    <span aria-hidden="true">↻</span>
+                    <span class="count">1</span>
+                </span>
+                <span aria-label="0 favorites"
+                      role="img"
+                      title="Favorites">
+                    <span aria-hidden="true">★</span>
+                    <span class="count">0</span>
+                </span>
+            </div>
+            
+        </footer>
+        
+    </div>
+
+</article>
+                    
+                        <article class="post" 
+         role="article" 
+         data-post-id=""
+         tabindex="0"
+         aria-labelledby="post-author-unknown"
+         aria-describedby="post-content-unknown post-meta-unknown">
+
+    <div class="status">
+        
+        <header class="post_header">
+            <div class="user" 
+                 role="group" 
+                 aria-label="Post author information"
+                 id="post-author-unknown">
+
+                <div class="avatar">
+                    <a href="https://floss.social/@ubu" 
+                       target="_blank" 
+                       rel="noopener"
+                       aria-label="View ubuntu UK's profile">
+                        <img src="https://macawsocial.sfo3.cdn.digitaloceanspaces.com/cache/accounts/avatars/114/518/546/790/345/043/original/1d4da24b2ed78adc.png" 
+                             alt="" 
+                             role="presentation"
+                             loading="lazy"
+                             decoding="async">
+                    </a>
+                </div>
+            
+                <a href="https://floss.social/@ubu" 
+                   target="_blank" 
+                   rel="noopener"
+                   class="user-link"
+                   aria-label="View profile of ubuntu UK, username ubu">
+                    <span class="displayname">ubuntu UK</span>
+                    <span class="username">@ubu</span>
+                </a>
+
+            </div>
+
+            <nav class="links" 
+                 aria-label="Post actions"
+                 role="group">
+                <a href="https://macaw.social/@ubu@floss.social/115088368911050334" target="_blank" rel="noopener">home</a>
+                <a href="https://floss.social/@ubu/115088368842433679" target="_blank" rel="noopener">original</a>
+            </nav>
+
+        </header>
+          
+        <div class="post_content">
+            <div class="content" 
+                 id="post-content-unknown"
+                 role="main"
+                 aria-label="Post content">
+                <p>Happy Birthday Linux <a href="https://floss.social/tags/linux" class="mention hashtag" rel="nofollow noopener" target="_blank">#<span>linux</span></a></p>
+            </div>
+
+            
+        </div>
+
+        <footer class="post_footer" 
+                id="post-meta-unknown"
+                role="contentinfo">
+
+            <time class="published date" 
+                  data-date="2025-08-25T08:05:43+00:00"
+                  datetime="2025-08-25T08:05:43+00:00"
+                  aria-label="Posted at 2025-08-25T08:05:43+00:00">
+                <!-- JavaScript will populate this -->
+            </time>
+            
+            <div class="reactions" 
+                 role="group" 
+                 aria-label="Engagement metrics">
+                <span aria-label="0 replies"
+                      role="img"
+                      title="Replies">
+                    <span aria-hidden="true">⥄</span>
+                    <span class="count">0</span>
+                </span>
+                <span aria-label="1 boosts"
+                      role="img"
+                      title="Boosts">
+                    <span aria-hidden="true">↻</span>
+                    <span class="count">1</span>
+                </span>
+                <span aria-label="0 favorites"
+                      role="img"
+                      title="Favorites">
+                    <span aria-hidden="true">★</span>
+                    <span class="count">0</span>
+                </span>
+            </div>
+            
+        </footer>
+        
+    </div>
+
+</article>
+                    
+                </div>
+            </section>
+
+            <section class="stream" aria-labelledby="boosts-heading">
+                <h2 id="boosts-heading" class="stream_title">
+                    <span>Boosts</span>
+                </h2>
+                <div class="posts" 
+                     role="feed" 
+                     aria-label="Popular boosts from your timeline"
+                     aria-live="polite">
+                    
+                        <article class="post" 
+         role="article" 
+         data-post-id=""
+         tabindex="0"
+         aria-labelledby="post-author-unknown"
+         aria-describedby="post-content-unknown post-meta-unknown">
+
+    <div class="status">
+        
+        <header class="post_header">
+            <div class="user" 
+                 role="group" 
+                 aria-label="Post author information"
+                 id="post-author-unknown">
+
+                <div class="avatar">
+                    <a href="https://efdn.club/@cam" 
+                       target="_blank" 
+                       rel="noopener"
+                       aria-label="View Cam <img alt=minecraft_bee src="https://macawsocial.sfo3.cdn.digitaloceanspaces.com/cache/custom_emojis/images/000/189/930/original/0a667d090186a762.png">'s profile">
+                        <img src="https://macawsocial.sfo3.cdn.digitaloceanspaces.com/cache/accounts/avatars/111/231/120/037/698/954/original/115a7d7bfbee4012.png" 
+                             alt="" 
+                             role="presentation"
+                             loading="lazy"
+                             decoding="async">
+                    </a>
+                </div>
+            
+                <a href="https://efdn.club/@cam" 
+                   target="_blank" 
+                   rel="noopener"
+                   class="user-link"
+                   aria-label="View profile of Cam <img alt=minecraft_bee src="https://macawsocial.sfo3.cdn.digitaloceanspaces.com/cache/custom_emojis/images/000/189/930/original/0a667d090186a762.png">, username cam">
+                    <span class="displayname">Cam <img alt=minecraft_bee src="https://macawsocial.sfo3.cdn.digitaloceanspaces.com/cache/custom_emojis/images/000/189/930/original/0a667d090186a762.png"></span>
+                    <span class="username">@cam</span>
+                </a>
+
+            </div>
+
+            <nav class="links" 
+                 aria-label="Post actions"
+                 role="group">
+                <a href="https://macaw.social/@cam@efdn.club/115081182827043923" target="_blank" rel="noopener">home</a>
+                <a href="https://efdn.club/@cam/115081182830422706" target="_blank" rel="noopener">original</a>
+            </nav>
+
+        </header>
+          
+        <div class="post_content">
+            <div class="content" 
+                 id="post-content-unknown"
+                 role="main"
+                 aria-label="Post content">
+                
+            </div>
+
+            
+            <div class="medias" 
+                 role="group" 
+                 aria-label="Media attachments">
+                <div class="media"><img src="https://macawsocial.sfo3.cdn.digitaloceanspaces.com/cache/media_attachments/files/115/084/305/944/009/168/original/d502f84b377de21e.jpg" alt="hat that says ever since I was a small child I knew I wanted to be indoors on the computer"></div>
+            </div>
+            
+        </div>
+
+        <footer class="post_footer" 
+                id="post-meta-unknown"
+                role="contentinfo">
+
+            <time class="published date" 
+                  data-date="2025-08-24T01:38:13+00:00"
+                  datetime="2025-08-24T01:38:13+00:00"
+                  aria-label="Posted at 2025-08-24T01:38:13+00:00">
+                <!-- JavaScript will populate this -->
+            </time>
+            
+            <div class="reactions" 
+                 role="group" 
+                 aria-label="Engagement metrics">
+                <span aria-label="1 replies"
+                      role="img"
+                      title="Replies">
+                    <span aria-hidden="true">⥄</span>
+                    <span class="count">1</span>
+                </span>
+                <span aria-label="12 boosts"
+                      role="img"
+                      title="Boosts">
+                    <span aria-hidden="true">↻</span>
+                    <span class="count">12</span>
+                </span>
+                <span aria-label="0 favorites"
+                      role="img"
+                      title="Favorites">
+                    <span aria-hidden="true">★</span>
+                    <span class="count">0</span>
+                </span>
+            </div>
+            
+        </footer>
+        
+    </div>
+
+</article>
+                    
+                        <article class="post" 
+         role="article" 
+         data-post-id=""
+         tabindex="0"
+         aria-labelledby="post-author-unknown"
+         aria-describedby="post-content-unknown post-meta-unknown">
+
+    <div class="status">
+        
+        <header class="post_header">
+            <div class="user" 
+                 role="group" 
+                 aria-label="Post author information"
+                 id="post-author-unknown">
+
+                <div class="avatar">
+                    <a href="https://tech.lgbt/@maple00" 
+                       target="_blank" 
+                       rel="noopener"
+                       aria-label="View Ethylene's profile">
+                        <img src="https://macawsocial.sfo3.cdn.digitaloceanspaces.com/cache/accounts/avatars/115/086/897/280/413/421/original/5562c2aa6c47fd4e.webp" 
+                             alt="" 
+                             role="presentation"
+                             loading="lazy"
+                             decoding="async">
+                    </a>
+                </div>
+            
+                <a href="https://tech.lgbt/@maple00" 
+                   target="_blank" 
+                   rel="noopener"
+                   class="user-link"
+                   aria-label="View profile of Ethylene, username maple00">
+                    <span class="displayname">Ethylene</span>
+                    <span class="username">@maple00</span>
+                </a>
+
+            </div>
+
+            <nav class="links" 
+                 aria-label="Post actions"
+                 role="group">
+                <a href="https://macaw.social/@maple00@tech.lgbt/115085243231866995" target="_blank" rel="noopener">home</a>
+                <a href="https://tech.lgbt/@maple00/115085243200197470" target="_blank" rel="noopener">original</a>
+            </nav>
+
+        </header>
+          
+        <div class="post_content">
+            <div class="content" 
+                 id="post-content-unknown"
+                 role="main"
+                 aria-label="Post content">
+                <p><span class="h-card" translate="no"><a href="https://infosec.exchange/@catsalad" class="u-url mention" rel="nofollow noopener" target="_blank">@<span>catsalad</span></a></span> jowournalctl</p>
+            </div>
+
+            
+        </div>
+
+        <footer class="post_footer" 
+                id="post-meta-unknown"
+                role="contentinfo">
+
+            <time class="published date" 
+                  data-date="2025-08-24T18:50:50+00:00"
+                  datetime="2025-08-24T18:50:50+00:00"
+                  aria-label="Posted at 2025-08-24T18:50:50+00:00">
+                <!-- JavaScript will populate this -->
+            </time>
+            
+            <div class="reactions" 
+                 role="group" 
+                 aria-label="Engagement metrics">
+                <span aria-label="0 replies"
+                      role="img"
+                      title="Replies">
+                    <span aria-hidden="true">⥄</span>
+                    <span class="count">0</span>
+                </span>
+                <span aria-label="1 boosts"
+                      role="img"
+                      title="Boosts">
+                    <span aria-hidden="true">↻</span>
+                    <span class="count">1</span>
+                </span>
+                <span aria-label="1 favorites"
+                      role="img"
+                      title="Favorites">
+                    <span aria-hidden="true">★</span>
+                    <span class="count">1</span>
+                </span>
+            </div>
+            
+        </footer>
+        
+    </div>
+
+</article>
+                    
+                        <article class="post" 
+         role="article" 
+         data-post-id=""
+         tabindex="0"
+         aria-labelledby="post-author-unknown"
+         aria-describedby="post-content-unknown post-meta-unknown">
+
+    <div class="status">
+        
+        <header class="post_header">
+            <div class="user" 
+                 role="group" 
+                 aria-label="Post author information"
+                 id="post-author-unknown">
+
+                <div class="avatar">
+                    <a href="https://mastodon.social/@mrmrnelson" 
+                       target="_blank" 
+                       rel="noopener"
+                       aria-label="View Michael Nelson's profile">
+                        <img src="https://macawsocial.sfo3.cdn.digitaloceanspaces.com/cache/accounts/avatars/109/838/173/993/504/352/original/95b87db591a73220.jpg" 
+                             alt="" 
+                             role="presentation"
+                             loading="lazy"
+                             decoding="async">
+                    </a>
+                </div>
+            
+                <a href="https://mastodon.social/@mrmrnelson" 
+                   target="_blank" 
+                   rel="noopener"
+                   class="user-link"
+                   aria-label="View profile of Michael Nelson, username mrmrnelson">
+                    <span class="displayname">Michael Nelson</span>
+                    <span class="username">@mrmrnelson</span>
+                </a>
+
+            </div>
+
+            <nav class="links" 
+                 aria-label="Post actions"
+                 role="group">
+                <a href="https://macaw.social/@mrmrnelson@mastodon.social/115086659276786474" target="_blank" rel="noopener">home</a>
+                <a href="https://mastodon.social/@mrmrnelson/115086659261242867" target="_blank" rel="noopener">original</a>
+            </nav>
+
+        </header>
+          
+        <div class="post_content">
+            <div class="content" 
+                 id="post-content-unknown"
+                 role="main"
+                 aria-label="Post content">
+                <p>Zoë lounging in a cat food box. She knows how to spend a Sunday night. </p><p><a href="https://mastodon.social/tags/caturday" class="mention hashtag" rel="nofollow noopener" target="_blank">#<span>caturday</span></a></p>
+            </div>
+
+            
+            <div class="medias" 
+                 role="group" 
+                 aria-label="Media attachments">
+                <div class="media"><img src="https://macawsocial.sfo3.cdn.digitaloceanspaces.com/cache/media_attachments/files/115/086/863/087/299/452/original/c9bf7fb7fbdbf941.jpg" alt="A black and white tuxedo cat sits snugly inside a cardboard box labeled “b.f.f Best Feline Friend, OMG – Oh My Gravy!, Variety Pack – Rainbow A Gogo.” The cat is lounging comfortably with its front paws draped over the edge, looking directly at the camera with bright eyes. The box is placed on a tiled floor in front of a fireplace screen."></div>
+            </div>
+            
+        </div>
+
+        <footer class="post_footer" 
+                id="post-meta-unknown"
+                role="contentinfo">
+
+            <time class="published date" 
+                  data-date="2025-08-25T00:50:57+00:00"
+                  datetime="2025-08-25T00:50:57+00:00"
+                  aria-label="Posted at 2025-08-25T00:50:57+00:00">
+                <!-- JavaScript will populate this -->
+            </time>
+            
+            <div class="reactions" 
+                 role="group" 
+                 aria-label="Engagement metrics">
+                <span aria-label="1 replies"
+                      role="img"
+                      title="Replies">
+                    <span aria-hidden="true">⥄</span>
+                    <span class="count">1</span>
+                </span>
+                <span aria-label="14 boosts"
+                      role="img"
+                      title="Boosts">
+                    <span aria-hidden="true">↻</span>
+                    <span class="count">14</span>
+                </span>
+                <span aria-label="12 favorites"
+                      role="img"
+                      title="Favorites">
+                    <span aria-hidden="true">★</span>
+                    <span class="count">12</span>
+                </span>
+            </div>
+            
+        </footer>
+        
+    </div>
+
+</article>
+                    
+                        <article class="post" 
+         role="article" 
+         data-post-id=""
+         tabindex="0"
+         aria-labelledby="post-author-unknown"
+         aria-describedby="post-content-unknown post-meta-unknown">
+
+    <div class="status">
+        
+        <header class="post_header">
+            <div class="user" 
+                 role="group" 
+                 aria-label="Post author information"
+                 id="post-author-unknown">
+
+                <div class="avatar">
+                    <a href="https://mastodon.art/@voxelith" 
+                       target="_blank" 
+                       rel="noopener"
+                       aria-label="View voxelith's profile">
+                        <img src="https://macawsocial.sfo3.cdn.digitaloceanspaces.com/cache/accounts/avatars/115/014/598/114/543/780/original/fdedfcaaacaddad6.png" 
+                             alt="" 
+                             role="presentation"
+                             loading="lazy"
+                             decoding="async">
+                    </a>
+                </div>
+            
+                <a href="https://mastodon.art/@voxelith" 
+                   target="_blank" 
+                   rel="noopener"
+                   class="user-link"
+                   aria-label="View profile of voxelith, username voxelith">
+                    <span class="displayname">voxelith</span>
+                    <span class="username">@voxelith</span>
+                </a>
+
+            </div>
+
+            <nav class="links" 
+                 aria-label="Post actions"
+                 role="group">
+                <a href="https://macaw.social/@voxelith@mastodon.art/115086597249775500" target="_blank" rel="noopener">home</a>
+                <a href="https://mastodon.art/@voxelith/115086597285239493" target="_blank" rel="noopener">original</a>
+            </nav>
+
+        </header>
+          
+        <div class="post_content">
+            <div class="content" 
+                 id="post-content-unknown"
+                 role="main"
+                 aria-label="Post content">
+                <p>Here is a <a href="https://mastodon.art/tags/dagger" class="mention hashtag" rel="nofollow noopener" target="_blank">#<span>dagger</span></a> for <span class="h-card" translate="no"><a href="https://mastodon.art/@pixel_dailies" class="u-url mention" rel="nofollow noopener" target="_blank">@<span>pixel_dailies</span></a></span> . It's very pointy, and also it automatically floats when not in use!</p><p>Palette: <a href="https://lospec.com/palette-list/lava-gb" rel="nofollow noopener" translate="no" target="_blank"><span class="invisible">https://</span><span class="">lospec.com/palette-list/lava-gb</span><span class="invisible"></span></a></p><p><a href="https://mastodon.art/tags/PixelArt" class="mention hashtag" rel="nofollow noopener" target="_blank">#<span>PixelArt</span></a> <a href="https://mastodon.art/tags/aseprite" class="mention hashtag" rel="nofollow noopener" target="_blank">#<span>aseprite</span></a> <a href="https://mastodon.art/tags/pixel_dailies" class="mention hashtag" rel="nofollow noopener" target="_blank">#<span>pixel_dailies</span></a></p>
+            </div>
+
+            
+            <div class="medias" 
+                 role="group" 
+                 aria-label="Media attachments">
+                <div class="media"><img src="https://macawsocial.sfo3.cdn.digitaloceanspaces.com/cache/media_attachments/files/115/087/165/492/609/148/original/53d689845c894c66.png" alt="An angular dagger floating in the air"></div>
+            </div>
+            
+        </div>
+
+        <footer class="post_footer" 
+                id="post-meta-unknown"
+                role="contentinfo">
+
+            <time class="published date" 
+                  data-date="2025-08-25T00:35:11+00:00"
+                  datetime="2025-08-25T00:35:11+00:00"
+                  aria-label="Posted at 2025-08-25T00:35:11+00:00">
+                <!-- JavaScript will populate this -->
+            </time>
+            
+            <div class="reactions" 
+                 role="group" 
+                 aria-label="Engagement metrics">
+                <span aria-label="1 replies"
+                      role="img"
+                      title="Replies">
+                    <span aria-hidden="true">⥄</span>
+                    <span class="count">1</span>
+                </span>
+                <span aria-label="5 boosts"
+                      role="img"
+                      title="Boosts">
+                    <span aria-hidden="true">↻</span>
+                    <span class="count">5</span>
+                </span>
+                <span aria-label="5 favorites"
+                      role="img"
+                      title="Favorites">
+                    <span aria-hidden="true">★</span>
+                    <span class="count">5</span>
+                </span>
+            </div>
+            
+        </footer>
+        
+    </div>
+
+</article>
+                    
+                        <article class="post" 
+         role="article" 
+         data-post-id=""
+         tabindex="0"
+         aria-labelledby="post-author-unknown"
+         aria-describedby="post-content-unknown post-meta-unknown">
+
+    <div class="status">
+        
+        <header class="post_header">
+            <div class="user" 
+                 role="group" 
+                 aria-label="Post author information"
+                 id="post-author-unknown">
+
+                <div class="avatar">
+                    <a href="https://mastodon.social/@tubetime" 
+                       target="_blank" 
+                       rel="noopener"
+                       aria-label="View Tube Time's profile">
+                        <img src="https://macawsocial.sfo3.cdn.digitaloceanspaces.com/cache/accounts/avatars/109/283/679/858/298/604/original/dca171563997f2c3.png" 
+                             alt="" 
+                             role="presentation"
+                             loading="lazy"
+                             decoding="async">
+                    </a>
+                </div>
+            
+                <a href="https://mastodon.social/@tubetime" 
+                   target="_blank" 
+                   rel="noopener"
+                   class="user-link"
+                   aria-label="View profile of Tube Time, username tubetime">
+                    <span class="displayname">Tube Time</span>
+                    <span class="username">@tubetime</span>
+                </a>
+
+            </div>
+
+            <nav class="links" 
+                 aria-label="Post actions"
+                 role="group">
+                <a href="https://macaw.social/@tubetime@mastodon.social/115085637966310838" target="_blank" rel="noopener">home</a>
+                <a href="https://mastodon.social/@tubetime/115085637853254173" target="_blank" rel="noopener">original</a>
+            </nav>
+
+        </header>
+          
+        <div class="post_content">
+            <div class="content" 
+                 id="post-content-unknown"
+                 role="main"
+                 aria-label="Post content">
+                <p>i reverse-engineered the Raspberry Pi Compute Module 5! check it out at <a href="https://github.com/schlae/cm5-reveng" rel="nofollow noopener" translate="no" target="_blank"><span class="invisible">https://</span><span class="">github.com/schlae/cm5-reveng</span><span class="invisible"></span></a></p>
+            </div>
+
+            
+            <div class="medias" 
+                 role="group" 
+                 aria-label="Media attachments">
+                <div class="media"><img src="https://macawsocial.sfo3.cdn.digitaloceanspaces.com/cache/media_attachments/files/115/085/637/928/163/435/original/c191293eba955d62.png" alt="board layout in KiCad with lots of layers and colors"></div>
+            </div>
+            
+        </div>
+
+        <footer class="post_footer" 
+                id="post-meta-unknown"
+                role="contentinfo">
+
+            <time class="published date" 
+                  data-date="2025-08-24T20:31:12+00:00"
+                  datetime="2025-08-24T20:31:12+00:00"
+                  aria-label="Posted at 2025-08-24T20:31:12+00:00">
+                <!-- JavaScript will populate this -->
+            </time>
+            
+            <div class="reactions" 
+                 role="group" 
+                 aria-label="Engagement metrics">
+                <span aria-label="15 replies"
+                      role="img"
+                      title="Replies">
+                    <span aria-hidden="true">⥄</span>
+                    <span class="count">15</span>
+                </span>
+                <span aria-label="190 boosts"
+                      role="img"
+                      title="Boosts">
+                    <span aria-hidden="true">↻</span>
+                    <span class="count">190</span>
+                </span>
+                <span aria-label="285 favorites"
+                      role="img"
+                      title="Favorites">
+                    <span aria-hidden="true">★</span>
+                    <span class="count">285</span>
+                </span>
+            </div>
+            
+        </footer>
+        
+    </div>
+
+</article>
+                    
+                        <article class="post" 
+         role="article" 
+         data-post-id=""
+         tabindex="0"
+         aria-labelledby="post-author-unknown"
+         aria-describedby="post-content-unknown post-meta-unknown">
+
+    <div class="status">
+        
+        <header class="post_header">
+            <div class="user" 
+                 role="group" 
+                 aria-label="Post author information"
+                 id="post-author-unknown">
+
+                <div class="avatar">
+                    <a href="https://mastodon.me.uk/@PoliceStateUK" 
+                       target="_blank" 
+                       rel="noopener"
+                       aria-label="View Police State UK's profile">
+                        <img src="https://macawsocial.sfo3.cdn.digitaloceanspaces.com/cache/accounts/avatars/111/409/728/337/699/661/original/1f5f9b9e1b739268.png" 
+                             alt="" 
+                             role="presentation"
+                             loading="lazy"
+                             decoding="async">
+                    </a>
+                </div>
+            
+                <a href="https://mastodon.me.uk/@PoliceStateUK" 
+                   target="_blank" 
+                   rel="noopener"
+                   class="user-link"
+                   aria-label="View profile of Police State UK, username PoliceStateUK">
+                    <span class="displayname">Police State UK</span>
+                    <span class="username">@PoliceStateUK</span>
+                </a>
+
+            </div>
+
+            <nav class="links" 
+                 aria-label="Post actions"
+                 role="group">
+                <a href="https://macaw.social/@PoliceStateUK@mastodon.me.uk/115085227116626238" target="_blank" rel="noopener">home</a>
+                <a href="https://mastodon.me.uk/@PoliceStateUK/115085227112609784" target="_blank" rel="noopener">original</a>
+            </nav>
+
+        </header>
+          
+        <div class="post_content">
+            <div class="content" 
+                 id="post-content-unknown"
+                 role="main"
+                 aria-label="Post content">
+                <p><a href="https://mastodon.me.uk/tags/Protest" class="mention hashtag" rel="nofollow noopener" target="_blank">#<span>Protest</span></a> <a href="https://mastodon.me.uk/tags/TransPride" class="mention hashtag" rel="nofollow noopener" target="_blank">#<span>TransPride</span></a> <a href="https://mastodon.me.uk/tags/Pride" class="mention hashtag" rel="nofollow noopener" target="_blank">#<span>Pride</span></a> <a href="https://mastodon.me.uk/tags/AsylumSeekers" class="mention hashtag" rel="nofollow noopener" target="_blank">#<span>AsylumSeekers</span></a> <a href="https://mastodon.me.uk/tags/Refugees" class="mention hashtag" rel="nofollow noopener" target="_blank">#<span>Refugees</span></a> <a href="https://mastodon.me.uk/tags/UKPol" class="mention hashtag" rel="nofollow noopener" target="_blank">#<span>UKPol</span></a></p>
+            </div>
+
+            
+            <div class="medias" 
+                 role="group" 
+                 aria-label="Media attachments">
+                <div class="media"><img src="https://macawsocial.sfo3.cdn.digitaloceanspaces.com/cache/media_attachments/files/115/085/375/595/856/514/original/0dbad03d019a937b.png" alt="A few weeks ago, roughly 100,000 turned up for the London Trans+ Pride march. Fewer than 3,000 across the whole country have turned up to anti-asylum 'protests'. Yet we are meant to take the latter as "the voice of the people" and the former as "the minority"."></div>
+            </div>
+            
+        </div>
+
+        <footer class="post_footer" 
+                id="post-meta-unknown"
+                role="contentinfo">
+
+            <time class="published date" 
+                  data-date="2025-08-24T18:46:44+00:00"
+                  datetime="2025-08-24T18:46:44+00:00"
+                  aria-label="Posted at 2025-08-24T18:46:44+00:00">
+                <!-- JavaScript will populate this -->
+            </time>
+            
+            <div class="reactions" 
+                 role="group" 
+                 aria-label="Engagement metrics">
+                <span aria-label="1 replies"
+                      role="img"
+                      title="Replies">
+                    <span aria-hidden="true">⥄</span>
+                    <span class="count">1</span>
+                </span>
+                <span aria-label="48 boosts"
+                      role="img"
+                      title="Boosts">
+                    <span aria-hidden="true">↻</span>
+                    <span class="count">48</span>
+                </span>
+                <span aria-label="20 favorites"
+                      role="img"
+                      title="Favorites">
+                    <span aria-hidden="true">★</span>
+                    <span class="count">20</span>
+                </span>
+            </div>
+            
+        </footer>
+        
+    </div>
+
+</article>
+                    
+                        <article class="post" 
+         role="article" 
+         data-post-id=""
+         tabindex="0"
+         aria-labelledby="post-author-unknown"
+         aria-describedby="post-content-unknown post-meta-unknown">
+
+    <div class="status">
+        
+        <header class="post_header">
+            <div class="user" 
+                 role="group" 
+                 aria-label="Post author information"
+                 id="post-author-unknown">
+
+                <div class="avatar">
+                    <a href="https://mastodon.moule.world/@amanda" 
+                       target="_blank" 
+                       rel="noopener"
+                       aria-label="View <img alt=Amanda src="https://macawsocial.sfo3.cdn.digitaloceanspaces.com/cache/custom_emojis/images/000/094/833/original/019325b3e97bc6f6.png">'s profile">
+                        <img src="https://macawsocial.sfo3.cdn.digitaloceanspaces.com/cache/accounts/avatars/111/165/827/259/446/972/original/11837f8e7935d202.jpg" 
+                             alt="" 
+                             role="presentation"
+                             loading="lazy"
+                             decoding="async">
+                    </a>
+                </div>
+            
+                <a href="https://mastodon.moule.world/@amanda" 
+                   target="_blank" 
+                   rel="noopener"
+                   class="user-link"
+                   aria-label="View profile of <img alt=Amanda src="https://macawsocial.sfo3.cdn.digitaloceanspaces.com/cache/custom_emojis/images/000/094/833/original/019325b3e97bc6f6.png">, username amanda">
+                    <span class="displayname"><img alt=Amanda src="https://macawsocial.sfo3.cdn.digitaloceanspaces.com/cache/custom_emojis/images/000/094/833/original/019325b3e97bc6f6.png"></span>
+                    <span class="username">@amanda</span>
+                </a>
+
+            </div>
+
+            <nav class="links" 
+                 aria-label="Post actions"
+                 role="group">
+                <a href="https://macaw.social/@amanda@moule.world/115087200600066520" target="_blank" rel="noopener">home</a>
+                <a href="https://mastodon.moule.world/@amanda/115087200606937513" target="_blank" rel="noopener">original</a>
+            </nav>
+
+        </header>
+          
+        <div class="post_content">
+            <div class="content" 
+                 id="post-content-unknown"
+                 role="main"
+                 aria-label="Post content">
+                <p>Meoww Mrrimrwa 🐈‍⬛✨: “Mw, Mew, Meouw, Meouwww, Mrraowwwmrrww” Meoww!! :AmandaSparkly:</p>
+            </div>
+
+            
+        </div>
+
+        <footer class="post_footer" 
+                id="post-meta-unknown"
+                role="contentinfo">
+
+            <time class="published date" 
+                  data-date="2025-08-25T03:08:37+00:00"
+                  datetime="2025-08-25T03:08:37+00:00"
+                  aria-label="Posted at 2025-08-25T03:08:37+00:00">
+                <!-- JavaScript will populate this -->
+            </time>
+            
+            <div class="reactions" 
+                 role="group" 
+                 aria-label="Engagement metrics">
+                <span aria-label="0 replies"
+                      role="img"
+                      title="Replies">
+                    <span aria-hidden="true">⥄</span>
+                    <span class="count">0</span>
+                </span>
+                <span aria-label="2 boosts"
+                      role="img"
+                      title="Boosts">
+                    <span aria-hidden="true">↻</span>
+                    <span class="count">2</span>
+                </span>
+                <span aria-label="0 favorites"
+                      role="img"
+                      title="Favorites">
+                    <span aria-hidden="true">★</span>
+                    <span class="count">0</span>
+                </span>
+            </div>
+            
+        </footer>
+        
+    </div>
+
+</article>
+                    
+                        <article class="post" 
+         role="article" 
+         data-post-id=""
+         tabindex="0"
+         aria-labelledby="post-author-unknown"
+         aria-describedby="post-content-unknown post-meta-unknown">
+
+    <div class="status">
+        
+        <header class="post_header">
+            <div class="user" 
+                 role="group" 
+                 aria-label="Post author information"
+                 id="post-author-unknown">
+
+                <div class="avatar">
+                    <a href="https://pouet.chapril.org/@oliweb" 
+                       target="_blank" 
+                       rel="noopener"
+                       aria-label="View oliweb's profile">
+                        <img src="https://macawsocial.sfo3.cdn.digitaloceanspaces.com/cache/accounts/avatars/112/674/045/095/141/107/original/64169b504315e061.jpg" 
+                             alt="" 
+                             role="presentation"
+                             loading="lazy"
+                             decoding="async">
+                    </a>
+                </div>
+            
+                <a href="https://pouet.chapril.org/@oliweb" 
+                   target="_blank" 
+                   rel="noopener"
+                   class="user-link"
+                   aria-label="View profile of oliweb, username oliweb">
+                    <span class="displayname">oliweb</span>
+                    <span class="username">@oliweb</span>
+                </a>
+
+            </div>
+
+            <nav class="links" 
+                 aria-label="Post actions"
+                 role="group">
+                <a href="https://macaw.social/@oliweb@pouet.chapril.org/115084744668258146" target="_blank" rel="noopener">home</a>
+                <a href="https://pouet.chapril.org/@oliweb/115084744712836038" target="_blank" rel="noopener">original</a>
+            </nav>
+
+        </header>
+          
+        <div class="post_content">
+            <div class="content" 
+                 id="post-content-unknown"
+                 role="main"
+                 aria-label="Post content">
+                <p>📰 Google confirme : vos mots de passe Gmail ont fuité, changez-les maintenant <a href="https://www.frandroid.com/marques/google/2769551_pourquoi-il-faut-changer-votre-mot-de-passe-gmail-rapidement" rel="nofollow noopener" translate="no" target="_blank"><span class="invisible">https://www.</span><span class="ellipsis">frandroid.com/marques/google/2</span><span class="invisible">769551_pourquoi-il-faut-changer-votre-mot-de-passe-gmail-rapidement</span></a></p>
+            </div>
+
+            
+        </div>
+
+        <footer class="post_footer" 
+                id="post-meta-unknown"
+                role="contentinfo">
+
+            <time class="published date" 
+                  data-date="2025-08-24T16:44:03+00:00"
+                  datetime="2025-08-24T16:44:03+00:00"
+                  aria-label="Posted at 2025-08-24T16:44:03+00:00">
+                <!-- JavaScript will populate this -->
+            </time>
+            
+            <div class="reactions" 
+                 role="group" 
+                 aria-label="Engagement metrics">
+                <span aria-label="0 replies"
+                      role="img"
+                      title="Replies">
+                    <span aria-hidden="true">⥄</span>
+                    <span class="count">0</span>
+                </span>
+                <span aria-label="29 boosts"
+                      role="img"
+                      title="Boosts">
+                    <span aria-hidden="true">↻</span>
+                    <span class="count">29</span>
+                </span>
+                <span aria-label="6 favorites"
+                      role="img"
+                      title="Favorites">
+                    <span aria-hidden="true">★</span>
+                    <span class="count">6</span>
+                </span>
+            </div>
+            
+        </footer>
+        
+    </div>
+
+</article>
+                    
+                        <article class="post" 
+         role="article" 
+         data-post-id=""
+         tabindex="0"
+         aria-labelledby="post-author-unknown"
+         aria-describedby="post-content-unknown post-meta-unknown">
+
+    <div class="status">
+        
+        <header class="post_header">
+            <div class="user" 
+                 role="group" 
+                 aria-label="Post author information"
+                 id="post-author-unknown">
+
+                <div class="avatar">
+                    <a href="https://mastodon.moule.world/@EverythingNow" 
+                       target="_blank" 
+                       rel="noopener"
+                       aria-label="View Everything NOW!'s profile">
+                        <img src="https://macawsocial.sfo3.cdn.digitaloceanspaces.com/cache/accounts/avatars/113/652/712/952/897/100/original/91481b565f375c4e.gif" 
+                             alt="" 
+                             role="presentation"
+                             loading="lazy"
+                             decoding="async">
+                    </a>
+                </div>
+            
+                <a href="https://mastodon.moule.world/@EverythingNow" 
+                   target="_blank" 
+                   rel="noopener"
+                   class="user-link"
+                   aria-label="View profile of Everything NOW!, username EverythingNow">
+                    <span class="displayname">Everything NOW!</span>
+                    <span class="username">@EverythingNow</span>
+                </a>
+
+            </div>
+
+            <nav class="links" 
+                 aria-label="Post actions"
+                 role="group">
+                <a href="https://macaw.social/@EverythingNow@moule.world/115037668819284955" target="_blank" rel="noopener">home</a>
+                <a href="https://mastodon.moule.world/@EverythingNow/115037668783838081" target="_blank" rel="noopener">original</a>
+            </nav>
+
+        </header>
+          
+        <div class="post_content">
+            <div class="content" 
+                 id="post-content-unknown"
+                 role="main"
+                 aria-label="Post content">
+                <p>Coyotes NOW!</p>
+            </div>
+
+            
+        </div>
+
+        <footer class="post_footer" 
+                id="post-meta-unknown"
+                role="contentinfo">
+
+            <time class="published date" 
+                  data-date="2025-08-16T09:12:02+00:00"
+                  datetime="2025-08-16T09:12:02+00:00"
+                  aria-label="Posted at 2025-08-16T09:12:02+00:00">
+                <!-- JavaScript will populate this -->
+            </time>
+            
+            <div class="reactions" 
+                 role="group" 
+                 aria-label="Engagement metrics">
+                <span aria-label="0 replies"
+                      role="img"
+                      title="Replies">
+                    <span aria-hidden="true">⥄</span>
+                    <span class="count">0</span>
+                </span>
+                <span aria-label="2 boosts"
+                      role="img"
+                      title="Boosts">
+                    <span aria-hidden="true">↻</span>
+                    <span class="count">2</span>
+                </span>
+                <span aria-label="1 favorites"
+                      role="img"
+                      title="Favorites">
+                    <span aria-hidden="true">★</span>
+                    <span class="count">1</span>
+                </span>
+            </div>
+            
+        </footer>
+        
+    </div>
+
+</article>
+                    
+                        <article class="post" 
+         role="article" 
+         data-post-id=""
+         tabindex="0"
+         aria-labelledby="post-author-unknown"
+         aria-describedby="post-content-unknown post-meta-unknown">
+
+    <div class="status">
+        
+        <header class="post_header">
+            <div class="user" 
+                 role="group" 
+                 aria-label="Post author information"
+                 id="post-author-unknown">
+
+                <div class="avatar">
+                    <a href="https://mastodon.social/@MEActNOW" 
+                       target="_blank" 
+                       rel="noopener"
+                       aria-label="View MEActNOW's profile">
+                        <img src="https://macawsocial.sfo3.cdn.digitaloceanspaces.com/cache/accounts/avatars/109/587/762/036/122/351/original/138029f23879eeac.jpg" 
+                             alt="" 
+                             role="presentation"
+                             loading="lazy"
+                             decoding="async">
+                    </a>
+                </div>
+            
+                <a href="https://mastodon.social/@MEActNOW" 
+                   target="_blank" 
+                   rel="noopener"
+                   class="user-link"
+                   aria-label="View profile of MEActNOW, username MEActNOW">
+                    <span class="displayname">MEActNOW</span>
+                    <span class="username">@MEActNOW</span>
+                </a>
+
+            </div>
+
+            <nav class="links" 
+                 aria-label="Post actions"
+                 role="group">
+                <a href="https://macaw.social/@MEActNOW@mastodon.social/115084728585568233" target="_blank" rel="noopener">home</a>
+                <a href="https://mastodon.social/@MEActNOW/115084728539432695" target="_blank" rel="noopener">original</a>
+            </nav>
+
+        </header>
+          
+        <div class="post_content">
+            <div class="content" 
+                 id="post-content-unknown"
+                 role="main"
+                 aria-label="Post content">
+                <p>👏🏼👏🏼👏🏼 Denmark just made your face and voice your intellectual property</p><p>It became the 1st country in Europe where your face, voice, and body are now your property.</p><p>A new law gives citizens full control over their digital selves</p>
+            </div>
+
+            
+            <div class="medias" 
+                 role="group" 
+                 aria-label="Media attachments">
+                <div class="media"><img src="https://macawsocial.sfo3.cdn.digitaloceanspaces.com/cache/media_attachments/files/115/085/340/008/491/722/original/37e8f4e96a2d3c77.jpg" alt=""></div>
+            </div>
+            
+        </div>
+
+        <footer class="post_footer" 
+                id="post-meta-unknown"
+                role="contentinfo">
+
+            <time class="published date" 
+                  data-date="2025-08-24T16:39:57+00:00"
+                  datetime="2025-08-24T16:39:57+00:00"
+                  aria-label="Posted at 2025-08-24T16:39:57+00:00">
+                <!-- JavaScript will populate this -->
+            </time>
+            
+            <div class="reactions" 
+                 role="group" 
+                 aria-label="Engagement metrics">
+                <span aria-label="2 replies"
+                      role="img"
+                      title="Replies">
+                    <span aria-hidden="true">⥄</span>
+                    <span class="count">2</span>
+                </span>
+                <span aria-label="65 boosts"
+                      role="img"
+                      title="Boosts">
+                    <span aria-hidden="true">↻</span>
+                    <span class="count">65</span>
+                </span>
+                <span aria-label="45 favorites"
+                      role="img"
+                      title="Favorites">
+                    <span aria-hidden="true">★</span>
+                    <span class="count">45</span>
+                </span>
+            </div>
+            
+        </footer>
+        
+    </div>
+
+</article>
+                    
+                        <article class="post" 
+         role="article" 
+         data-post-id=""
+         tabindex="0"
+         aria-labelledby="post-author-unknown"
+         aria-describedby="post-content-unknown post-meta-unknown">
+
+    <div class="status">
+        
+        <header class="post_header">
+            <div class="user" 
+                 role="group" 
+                 aria-label="Post author information"
+                 id="post-author-unknown">
+
+                <div class="avatar">
+                    <a href="https://mstdn.matthewmcgranahan.me/@CurbsideShip116" 
+                       target="_blank" 
+                       rel="noopener"
+                       aria-label="View Matthew Cullis's profile">
+                        <img src="https://macawsocial.sfo3.cdn.digitaloceanspaces.com/cache/accounts/avatars/112/091/559/791/936/893/original/2d79b1a443a2702f.jpg" 
+                             alt="" 
+                             role="presentation"
+                             loading="lazy"
+                             decoding="async">
+                    </a>
+                </div>
+            
+                <a href="https://mstdn.matthewmcgranahan.me/@CurbsideShip116" 
+                   target="_blank" 
+                   rel="noopener"
+                   class="user-link"
+                   aria-label="View profile of Matthew Cullis, username CurbsideShip116">
+                    <span class="displayname">Matthew Cullis</span>
+                    <span class="username">@CurbsideShip116</span>
+                </a>
+
+            </div>
+
+            <nav class="links" 
+                 aria-label="Post actions"
+                 role="group">
+                <a href="https://macaw.social/@CurbsideShip116@mstdn.matthewmcgranahan.me/115082954887369046" target="_blank" rel="noopener">home</a>
+                <a href="https://mstdn.matthewmcgranahan.me/@CurbsideShip116/115082954873533083" target="_blank" rel="noopener">original</a>
+            </nav>
+
+        </header>
+          
+        <div class="post_content">
+            <div class="content" 
+                 id="post-content-unknown"
+                 role="main"
+                 aria-label="Post content">
+                <p>Hmmmm, when the ABC reports that the protests in Canberra are "significantly smaller" than the protests in Brisbane and other cities, it only further builds further distrust in the ABC.</p><p>It is worth noting that the protest in Canberra has been growing in numbers. This should be the focus of the reporting. It being smaller than other cities is not important.</p><p><a href="https://mstdn.matthewmcgranahan.me/tags/auspol" class="mention hashtag" rel="nofollow noopener" target="_blank">#<span>auspol</span></a> <a href="https://mstdn.matthewmcgranahan.me/tags/newsmedia" class="mention hashtag" rel="nofollow noopener" target="_blank">#<span>newsmedia</span></a> <a href="https://mstdn.matthewmcgranahan.me/tags/palestine" class="mention hashtag" rel="nofollow noopener" target="_blank">#<span>palestine</span></a> <a href="https://mstdn.matthewmcgranahan.me/tags/gaza" class="mention hashtag" rel="nofollow noopener" target="_blank">#<span>gaza</span></a> <a href="https://mstdn.matthewmcgranahan.me/tags/israel" class="mention hashtag" rel="nofollow noopener" target="_blank">#<span>israel</span></a></p>
+            </div>
+
+            
+        </div>
+
+        <footer class="post_footer" 
+                id="post-meta-unknown"
+                role="contentinfo">
+
+            <time class="published date" 
+                  data-date="2025-08-24T09:08:53+00:00"
+                  datetime="2025-08-24T09:08:53+00:00"
+                  aria-label="Posted at 2025-08-24T09:08:53+00:00">
+                <!-- JavaScript will populate this -->
+            </time>
+            
+            <div class="reactions" 
+                 role="group" 
+                 aria-label="Engagement metrics">
+                <span aria-label="2 replies"
+                      role="img"
+                      title="Replies">
+                    <span aria-hidden="true">⥄</span>
+                    <span class="count">2</span>
+                </span>
+                <span aria-label="9 boosts"
+                      role="img"
+                      title="Boosts">
+                    <span aria-hidden="true">↻</span>
+                    <span class="count">9</span>
+                </span>
+                <span aria-label="18 favorites"
+                      role="img"
+                      title="Favorites">
+                    <span aria-hidden="true">★</span>
+                    <span class="count">18</span>
+                </span>
+            </div>
+            
+        </footer>
+        
+    </div>
+
+</article>
+                    
+                        <article class="post" 
+         role="article" 
+         data-post-id=""
+         tabindex="0"
+         aria-labelledby="post-author-unknown"
+         aria-describedby="post-content-unknown post-meta-unknown">
+
+    <div class="status">
+        
+        <header class="post_header">
+            <div class="user" 
+                 role="group" 
+                 aria-label="Post author information"
+                 id="post-author-unknown">
+
+                <div class="avatar">
+                    <a href="https://mastodon.social/@JeroenvanStrien" 
+                       target="_blank" 
+                       rel="noopener"
+                       aria-label="View Jeroen van Strien's profile">
+                        <img src="https://macawsocial.sfo3.cdn.digitaloceanspaces.com/cache/accounts/avatars/115/088/215/383/496/531/original/927a9789504483af.jpeg" 
+                             alt="" 
+                             role="presentation"
+                             loading="lazy"
+                             decoding="async">
+                    </a>
+                </div>
+            
+                <a href="https://mastodon.social/@JeroenvanStrien" 
+                   target="_blank" 
+                   rel="noopener"
+                   class="user-link"
+                   aria-label="View profile of Jeroen van Strien, username JeroenvanStrien">
+                    <span class="displayname">Jeroen van Strien</span>
+                    <span class="username">@JeroenvanStrien</span>
+                </a>
+
+            </div>
+
+            <nav class="links" 
+                 aria-label="Post actions"
+                 role="group">
+                <a href="https://macaw.social/@JeroenvanStrien@mastodon.social/115085299830527043" target="_blank" rel="noopener">home</a>
+                <a href="https://mastodon.social/@JeroenvanStrien/115085299863735671" target="_blank" rel="noopener">original</a>
+            </nav>
+
+        </header>
+          
+        <div class="post_content">
+            <div class="content" 
+                 id="post-content-unknown"
+                 role="main"
+                 aria-label="Post content">
+                <p>Mijn dochter en haar vriendin zoeken woonruimte in (de buurt van) Groningen. Ze kunnen max 1000 euro per maand betalen. Wie heeft een tip? 🏠</p>
+            </div>
+
+            
+            <div class="medias" 
+                 role="group" 
+                 aria-label="Media attachments">
+                <div class="media"><img src="https://macawsocial.sfo3.cdn.digitaloceanspaces.com/cache/media_attachments/files/115/088/215/475/281/353/original/a60fda410362f7de.png" alt=""></div>
+            </div>
+            
+        </div>
+
+        <footer class="post_footer" 
+                id="post-meta-unknown"
+                role="contentinfo">
+
+            <time class="published date" 
+                  data-date="2025-08-24T19:05:14+00:00"
+                  datetime="2025-08-24T19:05:14+00:00"
+                  aria-label="Posted at 2025-08-24T19:05:14+00:00">
+                <!-- JavaScript will populate this -->
+            </time>
+            
+            <div class="reactions" 
+                 role="group" 
+                 aria-label="Engagement metrics">
+                <span aria-label="0 replies"
+                      role="img"
+                      title="Replies">
+                    <span aria-hidden="true">⥄</span>
+                    <span class="count">0</span>
+                </span>
+                <span aria-label="41 boosts"
+                      role="img"
+                      title="Boosts">
+                    <span aria-hidden="true">↻</span>
+                    <span class="count">41</span>
+                </span>
+                <span aria-label="2 favorites"
+                      role="img"
+                      title="Favorites">
+                    <span aria-hidden="true">★</span>
+                    <span class="count">2</span>
+                </span>
+            </div>
+            
+        </footer>
+        
+    </div>
+
+</article>
+                    
+                        <article class="post" 
+         role="article" 
+         data-post-id=""
+         tabindex="0"
+         aria-labelledby="post-author-unknown"
+         aria-describedby="post-content-unknown post-meta-unknown">
+
+    <div class="status">
+        
+        <header class="post_header">
+            <div class="user" 
+                 role="group" 
+                 aria-label="Post author information"
+                 id="post-author-unknown">
+
+                <div class="avatar">
+                    <a href="https://mstdn.ca/@ECityMom" 
+                       target="_blank" 
+                       rel="noopener"
+                       aria-label="View WanderingHuman 🇨🇦's profile">
+                        <img src="https://macawsocial.sfo3.cdn.digitaloceanspaces.com/cache/accounts/avatars/109/354/229/338/610/354/original/ce625a71257503de.png" 
+                             alt="" 
+                             role="presentation"
+                             loading="lazy"
+                             decoding="async">
+                    </a>
+                </div>
+            
+                <a href="https://mstdn.ca/@ECityMom" 
+                   target="_blank" 
+                   rel="noopener"
+                   class="user-link"
+                   aria-label="View profile of WanderingHuman 🇨🇦, username ECityMom">
+                    <span class="displayname">WanderingHuman 🇨🇦</span>
+                    <span class="username">@ECityMom</span>
+                </a>
+
+            </div>
+
+            <nav class="links" 
+                 aria-label="Post actions"
+                 role="group">
+                <a href="https://macaw.social/@ECityMom@mstdn.ca/115079600237816267" target="_blank" rel="noopener">home</a>
+                <a href="https://mstdn.ca/@ECityMom/115079600270445735" target="_blank" rel="noopener">original</a>
+            </nav>
+
+        </header>
+          
+        <div class="post_content">
+            <div class="content" 
+                 id="post-content-unknown"
+                 role="main"
+                 aria-label="Post content">
+                <p>I have a big ask for the fediverse:</p><p>I'm looking for a professional voice actor/audiobook narrator who would be willing to chat with me about the industry. It's something I seriously want to pursue but am struggling with self-confidence and where to start. Looking for some guidance, support, maybe a bit of feedback. I know there are tons of websites, and I've been researching. I'd just like to have an honest chat with someone experienced (&amp; not trying to sell me something).</p><p>Pls boost for reach</p>
+            </div>
+
+            
+        </div>
+
+        <footer class="post_footer" 
+                id="post-meta-unknown"
+                role="contentinfo">
+
+            <time class="published date" 
+                  data-date="2025-08-23T18:55:45+00:00"
+                  datetime="2025-08-23T18:55:45+00:00"
+                  aria-label="Posted at 2025-08-23T18:55:45+00:00">
+                <!-- JavaScript will populate this -->
+            </time>
+            
+            <div class="reactions" 
+                 role="group" 
+                 aria-label="Engagement metrics">
+                <span aria-label="1 replies"
+                      role="img"
+                      title="Replies">
+                    <span aria-hidden="true">⥄</span>
+                    <span class="count">1</span>
+                </span>
+                <span aria-label="51 boosts"
+                      role="img"
+                      title="Boosts">
+                    <span aria-hidden="true">↻</span>
+                    <span class="count">51</span>
+                </span>
+                <span aria-label="7 favorites"
+                      role="img"
+                      title="Favorites">
+                    <span aria-hidden="true">★</span>
+                    <span class="count">7</span>
+                </span>
+            </div>
+            
+        </footer>
+        
+    </div>
+
+</article>
+                    
+                        <article class="post" 
+         role="article" 
+         data-post-id=""
+         tabindex="0"
+         aria-labelledby="post-author-unknown"
+         aria-describedby="post-content-unknown post-meta-unknown">
+
+    <div class="status">
+        
+        <header class="post_header">
+            <div class="user" 
+                 role="group" 
+                 aria-label="Post author information"
+                 id="post-author-unknown">
+
+                <div class="avatar">
+                    <a href="https://mastodon.world/@OWGF" 
+                       target="_blank" 
+                       rel="noopener"
+                       aria-label="View Our Wonderful Green Future's profile">
+                        <img src="https://macawsocial.sfo3.cdn.digitaloceanspaces.com/cache/accounts/avatars/110/873/981/021/921/294/original/e83a3dcc426d971a.png" 
+                             alt="" 
+                             role="presentation"
+                             loading="lazy"
+                             decoding="async">
+                    </a>
+                </div>
+            
+                <a href="https://mastodon.world/@OWGF" 
+                   target="_blank" 
+                   rel="noopener"
+                   class="user-link"
+                   aria-label="View profile of Our Wonderful Green Future, username OWGF">
+                    <span class="displayname">Our Wonderful Green Future</span>
+                    <span class="username">@OWGF</span>
+                </a>
+
+            </div>
+
+            <nav class="links" 
+                 aria-label="Post actions"
+                 role="group">
+                <a href="https://macaw.social/@OWGF@mastodon.world/115087966836390212" target="_blank" rel="noopener">home</a>
+                <a href="https://mastodon.world/@OWGF/115087966821967348" target="_blank" rel="noopener">original</a>
+            </nav>
+
+        </header>
+          
+        <div class="post_content">
+            <div class="content" 
+                 id="post-content-unknown"
+                 role="main"
+                 aria-label="Post content">
+                <p>We are seeing the first Solar Panels, made from Recycled Solar Panels,<br>in factories powered by Solar Panels.<br>These are early steps in a closed loop system which should power humanity for centuries to come with minimal environmental impacts and with doubtless more improvements to come. <a href="https://mastodon.world/tags/SolarPunk" class="mention hashtag" rel="nofollow noopener" target="_blank">#<span>SolarPunk</span></a><br><a href="https://www.trinasolar.com/us/resources/newsroom/Worlds-First-Fully-Recycled-c-Si-Module" rel="nofollow noopener" translate="no" target="_blank"><span class="invisible">https://www.</span><span class="ellipsis">trinasolar.com/us/resources/ne</span><span class="invisible">wsroom/Worlds-First-Fully-Recycled-c-Si-Module</span></a></p>
+            </div>
+
+            
+            <div class="medias" 
+                 role="group" 
+                 aria-label="Media attachments">
+                <div class="media"><img src="https://macawsocial.sfo3.cdn.digitaloceanspaces.com/cache/media_attachments/files/115/088/271/984/868/406/original/954bff6b643cdd4c.png" alt="Solar panel factory with Solar on the Roof."></div>
+            </div>
+            
+        </div>
+
+        <footer class="post_footer" 
+                id="post-meta-unknown"
+                role="contentinfo">
+
+            <time class="published date" 
+                  data-date="2025-08-25T06:23:29+00:00"
+                  datetime="2025-08-25T06:23:29+00:00"
+                  aria-label="Posted at 2025-08-25T06:23:29+00:00">
+                <!-- JavaScript will populate this -->
+            </time>
+            
+            <div class="reactions" 
+                 role="group" 
+                 aria-label="Engagement metrics">
+                <span aria-label="0 replies"
+                      role="img"
+                      title="Replies">
+                    <span aria-hidden="true">⥄</span>
+                    <span class="count">0</span>
+                </span>
+                <span aria-label="44 boosts"
+                      role="img"
+                      title="Boosts">
+                    <span aria-hidden="true">↻</span>
+                    <span class="count">44</span>
+                </span>
+                <span aria-label="42 favorites"
+                      role="img"
+                      title="Favorites">
+                    <span aria-hidden="true">★</span>
+                    <span class="count">42</span>
+                </span>
+            </div>
+            
+        </footer>
+        
+    </div>
+
+</article>
+                    
+                        <article class="post" 
+         role="article" 
+         data-post-id=""
+         tabindex="0"
+         aria-labelledby="post-author-unknown"
+         aria-describedby="post-content-unknown post-meta-unknown">
+
+    <div class="status">
+        
+        <header class="post_header">
+            <div class="user" 
+                 role="group" 
+                 aria-label="Post author information"
+                 id="post-author-unknown">
+
+                <div class="avatar">
+                    <a href="https://mastodon.ml/@Xeniax" 
+                       target="_blank" 
+                       rel="noopener"
+                       aria-label="View xeniax ⏚'s profile">
+                        <img src="https://macawsocial.sfo3.cdn.digitaloceanspaces.com/cache/accounts/avatars/110/654/551/926/340/994/original/f3b404cfb039452e.jpg" 
+                             alt="" 
+                             role="presentation"
+                             loading="lazy"
+                             decoding="async">
+                    </a>
+                </div>
+            
+                <a href="https://mastodon.ml/@Xeniax" 
+                   target="_blank" 
+                   rel="noopener"
+                   class="user-link"
+                   aria-label="View profile of xeniax ⏚, username Xeniax">
+                    <span class="displayname">xeniax ⏚</span>
+                    <span class="username">@Xeniax</span>
+                </a>
+
+            </div>
+
+            <nav class="links" 
+                 aria-label="Post actions"
+                 role="group">
+                <a href="https://macaw.social/@Xeniax@mastodon.ml/115065649782745480" target="_blank" rel="noopener">home</a>
+                <a href="https://mastodon.ml/@Xeniax/115065649774141146" target="_blank" rel="noopener">original</a>
+            </nav>
+
+        </header>
+          
+        <div class="post_content">
+            <div class="content" 
+                 id="post-content-unknown"
+                 role="main"
+                 aria-label="Post content">
+                <p>An example of algorithmic resistance</p>
+            </div>
+
+            
+            <div class="medias" 
+                 role="group" 
+                 aria-label="Media attachments">
+                <div class="media"><img src="https://macawsocial.sfo3.cdn.digitaloceanspaces.com/cache/media_attachments/files/115/066/307/697/067/788/original/1e71fac080044afe.jpg" alt="A screenshot from a post by a user "thewitchoftheweed"
+
+We live in the dumbest, lamest cyberpunk dystopia possible.
+So LA has been -- and continues to -- protest against ICE. These protests haven't gotten any smaller or lost any momentum, but social media wasn't reflecting it.
+TikTok users, realizing that the platform/other social media are censoring/deleting/shadowbanning these protest videos, decided to find a workaround.
+They're calling it the LA Music Festival. Ice detention centers and other protest locations are "stages." The hottest band is Rage Against the Machine. "Here's what gear you should be bringing to stay safe at the LA Music Festival."
+And it fucking worked.
+TikTok has become a proving ground for a lot of new music, meaning lots of labels and organizations have lucrative deals with TikTok to promote their new artists and music festivals. So they absolutely cannot censor the words "music festival" or train the algorithm to ignore it, or they risk endangering that very important revenue.
+So now protest videos are flooding feeds again, but it's the LA 24/7 Music Festival. Truly an incredible timeline we've landed in."></div>
+            </div>
+            
+        </div>
+
+        <footer class="post_footer" 
+                id="post-meta-unknown"
+                role="contentinfo">
+
+            <time class="published date" 
+                  data-date="2025-08-21T07:47:58+00:00"
+                  datetime="2025-08-21T07:47:58+00:00"
+                  aria-label="Posted at 2025-08-21T07:47:58+00:00">
+                <!-- JavaScript will populate this -->
+            </time>
+            
+            <div class="reactions" 
+                 role="group" 
+                 aria-label="Engagement metrics">
+                <span aria-label="4 replies"
+                      role="img"
+                      title="Replies">
+                    <span aria-hidden="true">⥄</span>
+                    <span class="count">4</span>
+                </span>
+                <span aria-label="131 boosts"
+                      role="img"
+                      title="Boosts">
+                    <span aria-hidden="true">↻</span>
+                    <span class="count">131</span>
+                </span>
+                <span aria-label="38 favorites"
+                      role="img"
+                      title="Favorites">
+                    <span aria-hidden="true">★</span>
+                    <span class="count">38</span>
+                </span>
+            </div>
+            
+        </footer>
+        
+    </div>
+
+</article>
+                    
+                        <article class="post" 
+         role="article" 
+         data-post-id=""
+         tabindex="0"
+         aria-labelledby="post-author-unknown"
+         aria-describedby="post-content-unknown post-meta-unknown">
+
+    <div class="status">
+        
+        <header class="post_header">
+            <div class="user" 
+                 role="group" 
+                 aria-label="Post author information"
+                 id="post-author-unknown">
+
+                <div class="avatar">
+                    <a href="https://retro.pizza/@seekingfreedom" 
+                       target="_blank" 
+                       rel="noopener"
+                       aria-label="View Mrs.Alice <img alt=verified_twit src="https://macawsocial.sfo3.cdn.digitaloceanspaces.com/cache/custom_emojis/images/000/009/770/original/d750a36301bce16d.png">✨'s profile">
+                        <img src="https://macawsocial.sfo3.cdn.digitaloceanspaces.com/cache/accounts/avatars/110/750/417/025/399/465/original/f1cd636908da0a44.png" 
+                             alt="" 
+                             role="presentation"
+                             loading="lazy"
+                             decoding="async">
+                    </a>
+                </div>
+            
+                <a href="https://retro.pizza/@seekingfreedom" 
+                   target="_blank" 
+                   rel="noopener"
+                   class="user-link"
+                   aria-label="View profile of Mrs.Alice <img alt=verified_twit src="https://macawsocial.sfo3.cdn.digitaloceanspaces.com/cache/custom_emojis/images/000/009/770/original/d750a36301bce16d.png">✨, username seekingfreedom">
+                    <span class="displayname">Mrs.Alice <img alt=verified_twit src="https://macawsocial.sfo3.cdn.digitaloceanspaces.com/cache/custom_emojis/images/000/009/770/original/d750a36301bce16d.png">✨</span>
+                    <span class="username">@seekingfreedom</span>
+                </a>
+
+            </div>
+
+            <nav class="links" 
+                 aria-label="Post actions"
+                 role="group">
+                <a href="https://macaw.social/@seekingfreedom@retro.pizza/115051937785962154" target="_blank" rel="noopener">home</a>
+                <a href="https://retro.pizza/@seekingfreedom/115051937783301651" target="_blank" rel="noopener">original</a>
+            </nav>
+
+        </header>
+          
+        <div class="post_content">
+            <div class="content" 
+                 id="post-content-unknown"
+                 role="main"
+                 aria-label="Post content">
+                <p>Eleanor Rigby<br>typing a prompt on her iPhone that no one can see<br>in ChatGPT</p><p>Look at it working,<br>flashing 3 dots before sending its saccharine reply—<br>boyfriend AI</p><p>All the lonely people,<br>Where do they all come from?<br>All the lonely people,<br>Where do they all belong?</p>
+            </div>
+
+            
+        </div>
+
+        <footer class="post_footer" 
+                id="post-meta-unknown"
+                role="contentinfo">
+
+            <time class="published date" 
+                  data-date="2025-08-18T21:40:49+00:00"
+                  datetime="2025-08-18T21:40:49+00:00"
+                  aria-label="Posted at 2025-08-18T21:40:49+00:00">
+                <!-- JavaScript will populate this -->
+            </time>
+            
+            <div class="reactions" 
+                 role="group" 
+                 aria-label="Engagement metrics">
+                <span aria-label="1 replies"
+                      role="img"
+                      title="Replies">
+                    <span aria-hidden="true">⥄</span>
+                    <span class="count">1</span>
+                </span>
+                <span aria-label="80 boosts"
+                      role="img"
+                      title="Boosts">
+                    <span aria-hidden="true">↻</span>
+                    <span class="count">80</span>
+                </span>
+                <span aria-label="11 favorites"
+                      role="img"
+                      title="Favorites">
+                    <span aria-hidden="true">★</span>
+                    <span class="count">11</span>
+                </span>
+            </div>
+            
+        </footer>
+        
+    </div>
+
+</article>
+                    
+                </div>
+            </section>
+
+            
+
+        </main>
+    </div>
+
+    <!-- Loading indicator for JavaScript interactions -->
+    <div id="loading-indicator" class="sr-only" aria-live="polite" aria-atomic="true"></div>
+    
+    <!-- Error message container -->
+    <div id="error-container" aria-live="assertive" aria-atomic="true"></div>
+
+    <!-- Enhanced JavaScript -->
+    <script src="style.js" defer></script>
+    
+    <!-- Service Worker registration (optional) -->
+    <script>
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('/sw.js')
+                    .catch(err => console.log('SW registration failed'));
+            });
+        }
+    </script>
+</body>
+</html>
