@@ -39,3 +39,21 @@ A fork of [hodgesmr/mastodon_digest](https://github.com/hodgesmr/mastodon_digest
 5. Allow github actions to write to the repo under `Settings` → `Actions` → `General`, check `Read and write permissions` and Save
 6. Create the `gh-pages` branch
 7. Run the action from the `Actions` tab and when it succeeds publish your digest by going to `Settings` → `Pages` and selecting to deploy from the `root` of the `gh-pages` branch.
+
+## Local usage with `uv`
+
+This repository now ships dependency metadata in the scripts themselves, so you can run them without manual `pip` installs by using [uv](https://github.com/astral-sh/uv) on Python 3.13+:
+
+```bash
+# Generate a digest (requires env vars as usual)
+uv run run.py -n 12 -s SimpleWeighted -t normal
+
+# Render the showcase test data without hitting the API
+uv run run.py --demo-data
+
+# Emit machine-readable results while still building HTML (with demo data here)
+uv run run.py -n 6 --json - --demo-data
+
+# Experiment with async timeline fetching or alternate timelines
+uv run run.py --async-fetch --timeline federated
+```

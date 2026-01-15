@@ -17,7 +17,7 @@
                     <a href="{{ post['account_url'] }}" 
                        target="_blank" 
                        rel="noopener"
-                       aria-label="View {{ post['display_name'] }}'s profile">
+                       aria-label="View {{ post['raw_display_name'] }}'s profile">
                         <img src="{{ post['account_avatar'] }}" 
                              alt="" 
                              role="presentation"
@@ -30,7 +30,7 @@
                    target="_blank" 
                    rel="noopener"
                    class="user-link"
-                   aria-label="View profile of {{ post['display_name'] }}, username {{ post['username'] }}">
+                   aria-label="View profile of {{ post['raw_display_name'] }}, username {{ post['username'] }}">
                     <span class="displayname">{{ post['display_name'] }}</span>
                     <span class="username">@{{ post['username'] }}</span>
                 </a>
@@ -40,12 +40,24 @@
             <nav class="links" 
                  aria-label="Post actions"
                  role="group">
-                {{ post['home_link'] }}
-                {{ post['original_link'] }}
+                <a href="{{ post['home_url'] }}"
+                   target="_blank"
+                   rel="noopener"
+                   data-link="home"
+                   aria-label="Open post on your home instance">
+                    home
+                </a>
+                <a href="{{ post['original_url'] }}"
+                   target="_blank"
+                   rel="noopener"
+                   data-link="original"
+                   aria-label="Open original post">
+                    original
+                </a>
             </nav>
 
         </header>
-          
+
         <div class="post_content">
             <div class="content" 
                  id="post-content-{{ post.get('id', 'unknown') }}"
@@ -55,10 +67,30 @@
             </div>
 
             {% if post['media'] %}
-            <div class="medias" 
+            <div class="medias medias-count-{{ post['media']|length }}" 
                  role="group" 
                  aria-label="Media attachments">
-                {{ post['media'] | safe }}
+                {% for media in post['media'] %}
+                <figure class="media-item media-type-{{ media.type }}">
+                    {% if media.is_video %}
+                    <video src="{{ media.original_url }}" 
+                           {% if media.autoplay %}autoplay loop muted playsinline{% endif %}
+                           controls 
+                           preload="metadata">
+                    </video>
+                    {% else %}
+                    <a href="{{ media.original_url }}" target="_blank" rel="noopener">
+                        <img src="{{ media.preview_url }}" 
+                             alt="{{ media.description_attr }}" 
+                             loading="lazy" 
+                             decoding="async">
+                    </a>
+                    {% endif %}
+                    {% if media.description_text %}
+                    <figcaption>{{ media.description_text }}</figcaption>
+                    {% endif %}
+                </figure>
+                {% endfor %}
             </div>
             {% endif %}
         </div>

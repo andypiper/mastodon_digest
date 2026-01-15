@@ -3,10 +3,8 @@ from __future__ import annotations
 import importlib
 import inspect
 from abc import ABC, abstractmethod
-from math import sqrt
-from typing import TYPE_CHECKING, Self
-
-from scipy import stats
+from math import prod, sqrt
+from typing import TYPE_CHECKING, Iterable
 
 if TYPE_CHECKING:
     from models import ScoredPost
@@ -47,21 +45,23 @@ class Scorer(ABC):
         return cls.__name__.replace("Scorer", "")
 
 
+def _geometric_engagement_average(metrics: Iterable[int]) -> float:
+    """Return geometric mean of engagement metrics after +1 smoothing."""
+    metrics = tuple(metrics)
+    if not any(metrics):
+        return 0.0
+    adjusted = tuple(value + 1 for value in metrics)
+    return prod(adjusted) ** (1 / len(adjusted))
+
+
 class SimpleScorer(UniformWeight, Scorer):
     @classmethod
     def score(cls, scored_post: ScoredPost) -> float:
-        if scored_post.info["reblogs_count"] or scored_post.info["favourites_count"]:
-            # If there's at least one metric
-            # We don't want zeros in other metrics to multiply that out
-            # Inflate every value by 1
-            metric_average = stats.gmean(
-                [
-                    scored_post.info["reblogs_count"]+1,
-                    scored_post.info["favourites_count"]+1,
-                ]
-            )
-        else:
-            metric_average = 0
+        metrics = (
+            scored_post.info["reblogs_count"],
+            scored_post.info["favourites_count"],
+        )
+        metric_average = _geometric_engagement_average(metrics)
         return metric_average * super().weight(scored_post)
 
 
@@ -74,19 +74,12 @@ class SimpleWeightedScorer(InverseFollowerWeight, SimpleScorer):
 class ExtendedSimpleScorer(UniformWeight, Scorer):
     @classmethod
     def score(cls, scored_post: ScoredPost) -> float:
-        if scored_post.info["reblogs_count"] or scored_post.info["favourites_count"] or scored_post.info["replies_count"]:
-            # If there's at least one metric
-            # We don't want zeros in other metrics to multiply that out
-            # Inflate every value by 1
-            metric_average = stats.gmean(
-                [
-                    scored_post.info["reblogs_count"]+1,
-                    scored_post.info["favourites_count"]+1,
-                    scored_post.info["replies_count"]+1,
-                ],
-            )
-        else:
-            metric_average = 0
+        metrics = (
+            scored_post.info["reblogs_count"],
+            scored_post.info["favourites_count"],
+            scored_post.info["replies_count"],
+        )
+        metric_average = _geometric_engagement_average(metrics)
         return metric_average * super().weight(scored_post)
 
 

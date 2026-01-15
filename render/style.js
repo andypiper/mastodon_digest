@@ -121,16 +121,52 @@ class MastodonDigest {
     // Enhanced keyboard navigation
     setupKeyboardNavigation() {
         const posts = Array.from(document.querySelectorAll('.post'));
+        if (!posts.length) {
+            return;
+        }
+
         let currentPostIndex = -1;
+        const motionQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
+        let prefersReducedMotion = motionQuery.matches;
+
+        const handleMotionChange = (event) => {
+            prefersReducedMotion = event.matches;
+        };
+        if (typeof motionQuery.addEventListener === 'function') {
+            motionQuery.addEventListener('change', handleMotionChange);
+        } else if (typeof motionQuery.addListener === 'function') {
+            motionQuery.addListener(handleMotionChange);
+        }
+
+        const observer = ('IntersectionObserver' in window) 
+            ? new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('in-view');
+                        const idx = parseInt(entry.target.dataset.index, 10);
+                        if (!Number.isNaN(idx)) {
+                            currentPostIndex = idx;
+                        }
+                    } else {
+                        entry.target.classList.remove('in-view');
+                    }
+                });
+            }, { threshold: 0.6 })
+            : null;
 
         const focusPost = (index) => {
             if (index >= 0 && index < posts.length) {
                 currentPostIndex = index;
                 posts[index].focus();
-                posts[index].scrollIntoView({ 
-                    behavior: 'smooth', 
-                    block: 'center' 
-                });
+                const scrollBehavior = prefersReducedMotion ? 'auto' : 'smooth';
+                try {
+                    posts[index].scrollIntoView({ 
+                        behavior: scrollBehavior, 
+                        block: 'center' 
+                    });
+                } catch (err) {
+                    posts[index].scrollIntoView();
+                }
                 
                 // Announce to screen readers
                 this.announceToScreenReader(`Focused on post ${index + 1} of ${posts.length}`);
@@ -158,7 +194,7 @@ class MastodonDigest {
                 case 'Enter':
                     if (currentPostIndex >= 0) {
                         e.preventDefault();
-                        const originalLink = posts[currentPostIndex].querySelector('.links a:first-child');
+                        const originalLink = posts[currentPostIndex].querySelector('.links a[data-link="original"]');
                         if (originalLink) {
                             window.open(originalLink.href, '_blank', 'noopener');
                         }
@@ -167,7 +203,7 @@ class MastodonDigest {
                 case 'h': // Open home link
                     if (currentPostIndex >= 0) {
                         e.preventDefault();
-                        const homeLink = posts[currentPostIndex].querySelector('.links a:last-child');
+                        const homeLink = posts[currentPostIndex].querySelector('.links a[data-link="home"]');
                         if (homeLink) {
                             window.open(homeLink.href, '_blank', 'noopener');
                         }
@@ -176,10 +212,14 @@ class MastodonDigest {
             }
         });
 
-        // Make posts focusable
+        // Make posts focusable and observable
         posts.forEach((post, index) => {
             post.setAttribute('tabindex', '0');
             post.setAttribute('role', 'article');
+            post.dataset.index = index;
+            if (observer) {
+                observer.observe(post);
+            }
             post.addEventListener('focus', () => {
                 currentPostIndex = index;
             });

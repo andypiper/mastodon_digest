@@ -1,0 +1,26 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "mastodon-digest"
+version = "0.2.0"
+description = "Generate an HTML digest of your Mastodon timeline."
+readme = "README.md"
+requires-python = ">=3.13"
+dependencies = [
+    "Jinja2==3.1.4",
+    "Mastodon.py==2.1.4",
+    "numpy==2.1.1",
+    "bleach==6.2.0",
+]
+authors = [
+    { name = "Matt Hodges" },
+]
+license = { text = "MIT" }
+
+[project.scripts]
+mastodon-digest = "run:main"
+
+[tool.setuptools]
+py-modules = ["api", "demo_data", "formatters", "models", "run", "scorers", "thresholds"]

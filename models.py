@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from typing import TYPE_CHECKING
+from typing import TYPE_CHECKING, Type
 
 if TYPE_CHECKING:
     from scorers import Scorer
@@ -9,6 +9,7 @@ if TYPE_CHECKING:
 class ScoredPost:
     def __init__(self, info: dict) -> None:
         self.info = info
+        self._score_cache: dict[Type["Scorer"], float] = {}
 
     @property
     def url(self) -> str:
@@ -18,7 +19,10 @@ class ScoredPost:
         return f"{mastodon_base_url}/@{self.info['account']['acct']}/{self.info['id']}"
 
     def get_score(self, scorer: Scorer) -> float:
-        return scorer.score(self)
+        scorer_type = type(scorer)
+        if scorer_type not in self._score_cache:
+            self._score_cache[scorer_type] = scorer.score(self)
+        return self._score_cache[scorer_type]
 
     @property
     def data(self) -> dict:

@@ -1,7 +1,11 @@
 from __future__ import annotations
 
+import asyncio
+from contextlib import suppress
 from datetime import datetime, timedelta, timezone
 from typing import TYPE_CHECKING
+
+from mastodon.errors import MastodonAPIError, MastodonNotFoundError
 
 from models import ScoredPost
 
@@ -29,8 +33,31 @@ def _should_filter_user(user_acct: str, user_bio: str, has_noindex: bool, mastod
     return False
 
 
+TIMELINE_SOURCES = {
+    "home": {
+        "method": "timeline",
+        "filters_context": "home",
+        "kwargs": {},
+    },
+    "local": {
+        "method": "timeline_public",
+        "filters_context": "public",
+        "kwargs": {"local": True},
+    },
+    "federated": {
+        "method": "timeline_public",
+        "filters_context": "public",
+        "kwargs": {"local": False},
+    },
+}
+
+
 def fetch_posts_and_boosts(
-    hours: int, mastodon_client: Mastodon
+    hours: int,
+    mastodon_client: Mastodon,
+    *,
+    use_async_fetch: bool = False,
+    timeline_type: str = "home",
 ) -> tuple[list[ScoredPost], list[ScoredPost]]:
     """
     Fetches posts from the home timeline that the account hasn't interacted with,
@@ -54,8 +81,22 @@ def fetch_posts_and_boosts(
         print(f"Error getting current user: {e}")
         return [], []
 
-    # First, get our filters
-    filters = mastodon_client.filters()
+    # First, try to get filters; prefer v2 to avoid deprecated endpoint warnings
+    filters = None
+    filters_version = None
+    try:
+        filters = mastodon_client.filters_v2()
+        filters_version = "v2"
+    except MastodonNotFoundError:
+        try:
+            filters = mastodon_client.filters()
+            filters_version = "v1"
+        except MastodonAPIError as error:
+            print(f"Warning: unable to load filters (v1): {error}")
+            filters = None
+    except MastodonAPIError as error:
+        print(f"Warning: unable to load filters (v2): {error}")
+        filters = None
 
     # Set our start query
     start = datetime.now(timezone.utc) - timedelta(hours=hours)
@@ -65,17 +106,25 @@ def fetch_posts_and_boosts(
     seen_post_urls = set()
     total_posts_seen = 0
 
-    # Iterate over our home timeline until we run out of posts or we hit the limit
-    response = mastodon_client.timeline(min_id=start)
-    while response and total_posts_seen < TIMELINE_LIMIT:
+    source = TIMELINE_SOURCES.get(timeline_type, TIMELINE_SOURCES["home"])
+    filters_context = source["filters_context"]
+    timeline_method = getattr(mastodon_client, source["method"])
+    base_timeline_kwargs = {"limit": 40, "min_id": start, **source["kwargs"]}
 
-        # Apply our server-side filters
-        if filters:
-            filtered_response = mastodon_client.filters_apply(response, filters, "home")
+    def handle_page(response_page) -> None:
+        nonlocal total_posts_seen
+
+        if filters_version == "v1" and filters:
+            filtered_response = mastodon_client.filters_apply(response_page, filters, filters_context)
         else:
-            filtered_response = response
+            filtered_response = response_page
 
         for post in filtered_response:
+            if total_posts_seen >= TIMELINE_LIMIT:
+                break
+
+            if post.get("filtered"):
+                continue
             if post["visibility"] != "public":
                 continue
 
@@ -83,33 +132,64 @@ def fetch_posts_and_boosts(
 
             boost = False
             if post["reblog"] is not None:
-                post = post["reblog"]  # look at the boosted post
+                post = post["reblog"]
                 boost = True
 
-            scored_post = ScoredPost(post)  # wrap the post data as a ScoredPost
+            scored_post = ScoredPost(post)
 
             if scored_post.url not in seen_post_urls:
-                # Check basic interaction flags first (fastest)
-                if (scored_post.info["reblogged"] or 
-                    scored_post.info["favourited"] or 
-                    scored_post.info["bookmarked"]):
+                if (
+                    scored_post.info["reblogged"]
+                    or scored_post.info["favourited"]
+                    or scored_post.info["bookmarked"]
+                ):
                     continue
-                
-                # Use optimized filtering for user-based decisions
+
                 user_acct = scored_post.info["account"]["acct"].strip().lower()
-                user_bio = scored_post.info["account"]["note"]  # Don't lowercase here
+                user_bio = scored_post.info["account"]["note"]
                 has_noindex = scored_post.info["account"].get("noindex", False)
-                
+
                 if not _should_filter_user(user_acct, user_bio, has_noindex, mastodon_acct):
-                    # Append to either the boosts list or the posts lists
                     if boost:
                         boosts.append(scored_post)
                     else:
                         posts.append(scored_post)
                     seen_post_urls.add(scored_post.url)
 
-        response = mastodon_client.fetch_previous(
-            response
-        )  # fetch the previous (because of reverse chron) page of results
+    async def async_fetch_loop() -> None:
+        nonlocal total_posts_seen
+
+        response = await asyncio.to_thread(timeline_method, **base_timeline_kwargs)
+        while response and total_posts_seen < TIMELINE_LIMIT:
+            next_task = None
+            if total_posts_seen < TIMELINE_LIMIT:
+                next_task = asyncio.create_task(
+                    asyncio.to_thread(mastodon_client.fetch_previous, response)
+                )
+
+            handle_page(response)
+
+            if total_posts_seen >= TIMELINE_LIMIT:
+                if next_task:
+                    next_task.cancel()
+                    with suppress(asyncio.CancelledError):
+                        await next_task
+                break
+
+            if next_task:
+                with suppress(asyncio.CancelledError):
+                    response = await next_task
+            else:
+                response = None
+
+    if use_async_fetch:
+        asyncio.run(async_fetch_loop())
+    else:
+        response = timeline_method(**base_timeline_kwargs)
+        while response and total_posts_seen < TIMELINE_LIMIT:
+            handle_page(response)
+            if total_posts_seen >= TIMELINE_LIMIT:
+                break
+            response = mastodon_client.fetch_previous(response)
 
     return posts, boosts

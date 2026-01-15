@@ -3,7 +3,7 @@ from __future__ import annotations
 from enum import Enum
 from typing import TYPE_CHECKING
 
-from scipy import stats
+import numpy as np
 
 if TYPE_CHECKING:
     from models import ScoredPost
@@ -30,12 +30,22 @@ class Threshold(Enum):
         
         # Score each post once and cache the result - O(n)
         scored_posts = [(post, post.get_score(scorer)) for post in posts]
-        all_scores = [score for _, score in scored_posts]
-        
-        # Use original percentileofscore logic but with cached scores - O(n)
+        scores = np.array([score for _, score in scored_posts], dtype=float)
+
+        if scores.size == 0:
+            return []
+
+        # Vectorized percentile-of-score equivalent
+        _, inverse_indices = np.unique(scores, return_inverse=True)
+        counts = np.bincount(inverse_indices)
+        lt_counts = np.concatenate(([0], np.cumsum(counts[:-1])))
+        percentiles = ((lt_counts + 0.5 * counts) / scores.size) * 100.0
+        score_percentiles = percentiles[inverse_indices]
+
         threshold_posts = [
-            post for post, score in scored_posts 
-            if stats.percentileofscore(all_scores, score) >= self.value
+            post
+            for (post, _), percentile in zip(scored_posts, score_percentiles)
+            if percentile >= self.value
         ]
 
         return threshold_posts

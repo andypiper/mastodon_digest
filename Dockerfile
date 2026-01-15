@@ -12,14 +12,11 @@ ARG VERSION
 
 WORKDIR $WORKDIR
 
-COPY requirements.txt . 
+COPY . .
 RUN mkdir -p venvs
 RUN python3 -m venv venvs/$NAME
 RUN venvs/$NAME/bin/pip install --upgrade pip
-RUN venvs/$NAME/bin/pip install -r requirements.txt
-
-COPY templates/ ./templates/
-COPY *.py .
+RUN venvs/$NAME/bin/pip install .
 
 LABEL org.label-schema.build-date=$BUILD_DATE \
       org.label-schema.name=$NAME \
