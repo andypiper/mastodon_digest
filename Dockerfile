@@ -1,10 +1,10 @@
-FROM python:3.13-slim-bookworm
+FROM python:3.13-slim
 
 ENV PYTHONUNBUFFERED=1
 
-ARG WORKDIR
+ARG WORKDIR="/opt/mastodon_digest"
 ARG BUILD_DATE
-ARG NAME
+ARG NAME="mastodon_digest"
 ARG ORG
 ARG VCS_REF
 ARG VENDOR
