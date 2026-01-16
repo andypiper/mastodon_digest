@@ -120,7 +120,11 @@ class MastodonDigest {
 
     // Enhanced keyboard navigation
     setupKeyboardNavigation() {
-        const posts = Array.from(document.querySelectorAll('.post'));
+        const posts = Array.from(document.querySelectorAll('.post')).sort((a, b) => {
+            const rectA = a.getBoundingClientRect();
+            const rectB = b.getBoundingClientRect();
+            return rectA.top - rectB.top || rectA.left - rectB.left;
+        });
         if (!posts.length) {
             return;
         }

@@ -58,6 +58,9 @@ def fetch_posts_and_boosts(
     *,
     use_async_fetch: bool = False,
     timeline_type: str = "home",
+    languages: set[str] | None = None,
+    exclude_polls: bool = False,
+    require_media: bool = False,
 ) -> tuple[list[ScoredPost], list[ScoredPost]]:
     """
     Fetches posts from the home timeline that the account hasn't interacted with,
@@ -119,21 +122,31 @@ def fetch_posts_and_boosts(
         else:
             filtered_response = response_page
 
-        for post in filtered_response:
+        for timeline_status in filtered_response:
             if total_posts_seen >= TIMELINE_LIMIT:
                 break
 
-            if post.get("filtered"):
+            if timeline_status.get("filtered"):
                 continue
-            if post["visibility"] != "public":
+            if timeline_status["visibility"] != "public":
+                continue
+
+            post = timeline_status
+            boost = False
+            if timeline_status.get("reblog") is not None:
+                post = timeline_status["reblog"]
+                boost = True
+
+            if languages:
+                post_language = (post.get("language") or "").lower()
+                if post_language not in languages:
+                    continue
+            if exclude_polls and post.get("poll") is not None:
+                continue
+            if require_media and not post.get("media_attachments"):
                 continue
 
             total_posts_seen += 1
-
-            boost = False
-            if post["reblog"] is not None:
-                post = post["reblog"]
-                boost = True
 
             scored_post = ScoredPost(post)
 

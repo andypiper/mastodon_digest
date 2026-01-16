@@ -72,6 +72,9 @@ def run(
     apply_demo_threshold: bool = False,
     async_fetch: bool = False,
     timeline_type: str = "home",
+    languages: set[str] | None = None,
+    exclude_polls: bool = False,
+    require_media: bool = False,
 ) -> None:
 
     start_time = time.time()
@@ -98,6 +101,9 @@ def run(
                 mastodon_client,
                 use_async_fetch=async_fetch,
                 timeline_type=timeline_type,
+                languages=languages,
+                exclude_polls=exclude_polls,
+                require_media=require_media,
             )
         finally:
             fetch_time = time.time() - fetch_start
@@ -224,6 +230,21 @@ def main(argv: list[str] | None = None) -> None:
         help="Which timeline to read from (home timeline by default)",
     )
     arg_parser.add_argument(
+        "--languages",
+        help="Comma-separated list of ISO language codes to include (e.g., en,de). Blank = all",
+        default=None,
+    )
+    arg_parser.add_argument(
+        "--exclude-polls",
+        action="store_true",
+        help="Exclude posts that contain polls",
+    )
+    arg_parser.add_argument(
+        "--require-media",
+        action="store_true",
+        help="Only include posts that have media attachments",
+    )
+    arg_parser.add_argument(
         "--demo-data",
         action="store_true",
         help="Render the built-in showcase dataset instead of calling the Mastodon API",
@@ -259,6 +280,12 @@ def main(argv: list[str] | None = None) -> None:
         if missing_vars:
             sys.exit(f"Missing environment variables: {', '.join(missing_vars)}")
 
+    languages = (
+        {lang.strip().lower() for lang in args.languages.split(",") if lang.strip()}
+        if args.languages
+        else None
+    )
+
     run(
         args.hours,
         scorers[args.scorer](),
@@ -271,6 +298,9 @@ def main(argv: list[str] | None = None) -> None:
         apply_demo_threshold=args.demo_apply_threshold,
         async_fetch=args.async_fetch,
         timeline_type=args.timeline,
+        languages=languages,
+        exclude_polls=args.exclude_polls,
+        require_media=args.require_media,
     )
 
 

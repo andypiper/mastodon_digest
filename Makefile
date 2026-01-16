@@ -1,11 +1,11 @@
 .PHONY: run help
 
-VERSION := $(shell git describe --abbrev=0 --tags)
+VERSION ?= $(shell git describe --abbrev=0 --tags 2>/dev/null || git rev-parse --short HEAD)
 BUILD_DATE := "$(shell date -u)"
 VCS_REF := $(shell git log -1 --pretty=%h)
 NAME := $(shell pwd | xargs basename)
-VENDOR := "Matt Hodges"
-ORG := hodgesmr
+VENDOR ?= "Andy Piper"
+ORG ?= andypiper
 WORKDIR := "/opt/${NAME}"
 
 DOCKER_SCAN_SUGGEST=false

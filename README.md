@@ -56,4 +56,7 @@ uv run run.py -n 6 --json - --demo-data
 
 # Experiment with async timeline fetching or alternate timelines
 uv run run.py --async-fetch --timeline federated
+
+# Filter by language / content type
+uv run run.py --languages en --exclude-polls --require-media
 ```
