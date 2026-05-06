@@ -16,7 +16,7 @@
                 <div class="avatar">
                     <a href="{{ post['account_url'] }}" 
                        target="_blank" 
-                       rel="noopener"
+                       rel="noopener noreferrer"
                        aria-label="View {{ post['raw_display_name'] }}'s profile">
                         <img src="{{ post['account_avatar'] }}" 
                              alt="" 
@@ -28,7 +28,7 @@
             
                 <a href="{{ post['account_url'] }}" 
                    target="_blank" 
-                   rel="noopener"
+                   rel="noopener noreferrer"
                    class="user-link"
                    aria-label="View profile of {{ post['raw_display_name'] }}, username {{ post['username'] }}">
                     <span class="displayname">{{ post['display_name'] }}</span>
@@ -42,14 +42,14 @@
                  role="group">
                 <a href="{{ post['home_url'] }}"
                    target="_blank"
-                   rel="noopener"
+                   rel="noopener noreferrer"
                    data-link="home"
                    aria-label="Open post on your home instance">
                     home
                 </a>
                 <a href="{{ post['original_url'] }}"
                    target="_blank"
-                   rel="noopener"
+                   rel="noopener noreferrer"
                    data-link="original"
                    aria-label="Open original post">
                     original
@@ -66,32 +66,78 @@
                 {{ post['content'] | safe }}
             </div>
 
+            {% if post['poll'] %}
+            <div class="poll" role="group" aria-label="Poll">
+                {% for option in post['poll']['options'] %}
+                <div class="poll-option">
+                    {% if post['poll']['expired'] and option['percent'] is not none %}
+                    <div class="poll-bar" role="presentation">
+                        <span class="poll-bar-fill" style="width: {{ option['percent'] }}%"></span>
+                    </div>
+                    {% endif %}
+                    <div class="poll-option-row">
+                        <span class="poll-option-title">{{ option['title'] }}</span>
+                        {% if post['poll']['expired'] and option['percent'] is not none %}
+                        <span class="poll-option-percent">{{ option['percent'] }}%</span>
+                        {% endif %}
+                    </div>
+                </div>
+                {% endfor %}
+                <div class="poll-meta">
+                    {{ post['poll']['votes_count'] }} vote{{ 's' if post['poll']['votes_count'] != 1 else '' }}
+                    · {{ 'Closed' if post['poll']['expired'] else 'Open' }}
+                    {% if post['poll']['multiple'] %} · Multiple choice{% endif %}
+                </div>
+            </div>
+            {% endif %}
+
             {% if post['media'] %}
-            <div class="medias medias-count-{{ post['media']|length }}" 
-                 role="group" 
+            <div class="medias medias-count-{{ post['media']|length }}"
+                 role="group"
                  aria-label="Media attachments">
                 {% for media in post['media'] %}
                 <figure class="media-item media-type-{{ media.type }}">
                     {% if media.is_video %}
-                    <video src="{{ media.original_url }}" 
+                    <video src="{{ media.original_url }}"
                            {% if media.autoplay %}autoplay loop muted playsinline{% endif %}
-                           controls 
+                           controls
                            preload="metadata">
                     </video>
                     {% else %}
-                    <a href="{{ media.original_url }}" target="_blank" rel="noopener">
-                        <img src="{{ media.preview_url }}" 
-                             alt="{{ media.description_attr }}" 
-                             loading="lazy" 
+                    <a href="{{ media.original_url }}" target="_blank" rel="noopener noreferrer">
+                        <img src="{{ media.preview_url }}"
+                             alt="{{ media.description }}"
+                             loading="lazy"
                              decoding="async">
                     </a>
                     {% endif %}
-                    {% if media.description_text %}
-                    <figcaption>{{ media.description_text }}</figcaption>
+                    {% if media.description %}
+                    <figcaption>{{ media.description }}</figcaption>
                     {% endif %}
                 </figure>
                 {% endfor %}
             </div>
+            {% endif %}
+
+            {% if post['quote'] %}
+            <blockquote class="quote-card">
+                {% if post['quote']['display_name'] %}
+                <div class="quote-header">
+                    <a href="{{ post['quote']['account_url'] }}" target="_blank" rel="noopener noreferrer" class="quote-author">
+                        <span class="quote-displayname">{{ post['quote']['display_name'] }}</span>
+                        <span class="quote-username">@{{ post['quote']['username'] }}</span>
+                    </a>
+                </div>
+                {% endif %}
+                {% if post['quote']['content'] %}
+                <div class="quote-content">{{ post['quote']['content'] | safe }}</div>
+                {% endif %}
+                {% if post['quote']['original_url'] %}
+                <a href="{{ post['quote']['original_url'] }}" target="_blank" rel="noopener noreferrer" class="quote-link">
+                    View quoted post ↗
+                </a>
+                {% endif %}
+            </blockquote>
             {% endif %}
         </div>
 

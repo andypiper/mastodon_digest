@@ -25,7 +25,6 @@ class MastodonDigest {
         this.setupLazyLoading();
         this.setupKeyboardNavigation();
         this.setupTouchGestures();
-        this.setupThemeDetection();
         this.setupIntersectionObserver();
         this.setupErrorHandling();
         this.announcePageLoad();
@@ -266,24 +265,6 @@ class MastodonDigest {
 
             startX = startY = endX = endY = null;
         }, { passive: true });
-    }
-
-    // Theme detection and system preference handling
-    setupThemeDetection() {
-        const prefersDark = window.matchMedia('(prefers-color-scheme: dark)');
-        const prefersContrast = window.matchMedia('(prefers-contrast: high)');
-        const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
-
-        const updateTheme = () => {
-            document.documentElement.setAttribute('data-theme', prefersDark.matches ? 'dark' : 'light');
-            document.documentElement.setAttribute('data-contrast', prefersContrast.matches ? 'high' : 'normal');
-            document.documentElement.setAttribute('data-motion', prefersReducedMotion.matches ? 'reduced' : 'normal');
-        };
-
-        updateTheme();
-        prefersDark.addEventListener('change', updateTheme);
-        prefersContrast.addEventListener('change', updateTheme);
-        prefersReducedMotion.addEventListener('change', updateTheme);
     }
 
     // Intersection observer for animations and analytics
