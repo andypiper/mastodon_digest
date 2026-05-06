@@ -2,9 +2,9 @@
 # requires-python = ">=3.13"
 # dependencies = [
 #     "Jinja2==3.1.4",
-#     "Mastodon.py==2.1.4",
+#     "Mastodon.py==2.2.1",
 #     "numpy==2.1.1",
-#     "bleach==6.2.0",
+#     "nh3>=0.2.17",
 # ]
 # ///
 
@@ -19,7 +19,7 @@ from datetime import datetime, timezone
 from pathlib import Path
 from typing import TYPE_CHECKING, Iterable
 
-from jinja2 import Environment, FileSystemLoader
+from jinja2 import Environment, FileSystemLoader, select_autoescape
 from mastodon import Mastodon
 
 from api import fetch_posts_and_boosts
@@ -35,10 +35,14 @@ if TYPE_CHECKING:
 
 
 def render_digest(context: dict, output_dir: Path) -> None:
-    environment = Environment(loader=FileSystemLoader("templates/"))
+    templates_path = Path(__file__).resolve().parent / "templates"
+    environment = Environment(
+        loader=FileSystemLoader(templates_path),
+        autoescape=select_autoescape(["html"]),
+    )
     template = environment.get_template("digest.html.jinja")
     output_html = template.render(context)
-    output_file_path = output_dir / 'index.html'
+    output_file_path = output_dir / "index.html"
     output_file_path.write_text(output_html)
 
 
@@ -89,10 +93,12 @@ def run(
         mastodon_client = Mastodon(
             access_token=mastodon_token,
             api_base_url=mastodon_base_url,
-            user_agent="mastodon_digest_builder"
+            user_agent="mastodon_digest_builder",
+            request_timeout=10,
         )
 
         # 1. Fetch all the posts and boosts from our home timeline that we haven't interacted with
+        posts, boosts = [], []
         print("Fetching timeline...", end="", flush=True)
         fetch_start = time.time()
         try:
@@ -107,7 +113,9 @@ def run(
             )
         finally:
             fetch_time = time.time() - fetch_start
-            print(f"\rFetched {len(posts)} posts and {len(boosts)} boosts in {fetch_time:.2f}s")
+            print(
+                f"\rFetched {len(posts)} posts and {len(boosts)} boosts in {fetch_time:.2f}s"
+            )
 
     # 2. Score them, and return those that meet our threshold
     scoring_start = time.time()
@@ -126,7 +134,9 @@ def run(
         mastodon_base_url,
     )
     scoring_time = time.time() - scoring_start
-    print(f"Scored and formatted {len(threshold_posts)} posts and {len(threshold_boosts)} boosts in {scoring_time:.2f}s")
+    print(
+        f"Scored and formatted {len(threshold_posts)} posts and {len(threshold_boosts)} boosts in {scoring_time:.2f}s"
+    )
 
     # 3. Build the digest
     render_start = time.time()
@@ -135,7 +145,7 @@ def run(
         "posts": threshold_posts,
         "boosts": threshold_boosts,
         "mastodon_base_url": mastodon_base_url,
-        "rendered_at": datetime.now(timezone.utc).isoformat().replace('+00:00', 'Z'),
+        "rendered_at": datetime.now(timezone.utc).isoformat().replace("+00:00", "Z"),
         "threshold": threshold.get_name(),
         "scorer": scorer.get_name(),
     }

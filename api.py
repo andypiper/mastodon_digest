@@ -13,23 +13,25 @@ if TYPE_CHECKING:
     from mastodon import Mastodon
 
 
-def _should_filter_user(user_acct: str, user_bio: str, has_noindex: bool, mastodon_acct: str) -> bool:
+def _should_filter_user(
+    user_acct: str, user_bio: str, has_noindex: bool, mastodon_acct: str
+) -> bool:
     """
     Returns True if the user should be filtered out (excluded from digest).
-    
+
     Optimized for short-circuit evaluation - fastest checks first.
     """
     if user_acct == mastodon_acct:
         return True  # Filter out own posts
-    
+
     if has_noindex:
         return True  # Filter out users with noindex API flag
-    
+
     # Only perform string operations if necessary
     user_bio_lower = user_bio.lower()
     if "#noindex" in user_bio_lower or "#nobot" in user_bio_lower:
         return True
-    
+
     return False
 
 
@@ -78,9 +80,9 @@ def fetch_posts_and_boosts(
 
     # Get authenticated user info from API
     try:
-        mastodon_acct = mastodon_client.me()['acct'].strip().lower()
+        mastodon_acct = mastodon_client.me()["acct"].strip().lower()
         print(f"Authenticated as: @{mastodon_acct}")
-    except Exception as e:
+    except MastodonAPIError as e:
         print(f"Error getting current user: {e}")
         return [], []
 
@@ -108,23 +110,31 @@ def fetch_posts_and_boosts(
     boosts = []
     seen_post_urls = set()
     total_posts_seen = 0
+    window_exhausted = False
 
     source = TIMELINE_SOURCES.get(timeline_type, TIMELINE_SOURCES["home"])
     filters_context = source["filters_context"]
     timeline_method = getattr(mastodon_client, source["method"])
-    base_timeline_kwargs = {"limit": 40, "min_id": start, **source["kwargs"]}
+    base_timeline_kwargs = {"limit": 80, "min_id": start, **source["kwargs"]}
 
     def handle_page(response_page) -> None:
-        nonlocal total_posts_seen
+        nonlocal total_posts_seen, window_exhausted
 
         if filters_version == "v1" and filters:
-            filtered_response = mastodon_client.filters_apply(response_page, filters, filters_context)
+            filtered_response = mastodon_client.filters_apply(
+                response_page, filters, filters_context
+            )
         else:
             filtered_response = response_page
 
         for timeline_status in filtered_response:
             if total_posts_seen >= TIMELINE_LIMIT:
                 break
+
+            created = timeline_status.get("created_at")
+            if created is not None and hasattr(created, "tzinfo") and created < start:
+                window_exhausted = True
+                return
 
             if timeline_status.get("filtered"):
                 continue
@@ -159,10 +169,12 @@ def fetch_posts_and_boosts(
                     continue
 
                 user_acct = scored_post.info["account"]["acct"].strip().lower()
-                user_bio = scored_post.info["account"]["note"]
+                user_bio = scored_post.info["account"].get("note") or ""
                 has_noindex = scored_post.info["account"].get("noindex", False)
 
-                if not _should_filter_user(user_acct, user_bio, has_noindex, mastodon_acct):
+                if not _should_filter_user(
+                    user_acct, user_bio, has_noindex, mastodon_acct
+                ):
                     if boost:
                         boosts.append(scored_post)
                     else:
@@ -170,19 +182,19 @@ def fetch_posts_and_boosts(
                     seen_post_urls.add(scored_post.url)
 
     async def async_fetch_loop() -> None:
-        nonlocal total_posts_seen
+        nonlocal total_posts_seen, window_exhausted
 
         response = await asyncio.to_thread(timeline_method, **base_timeline_kwargs)
-        while response and total_posts_seen < TIMELINE_LIMIT:
+        while response and total_posts_seen < TIMELINE_LIMIT and not window_exhausted:
             next_task = None
-            if total_posts_seen < TIMELINE_LIMIT:
+            if total_posts_seen < TIMELINE_LIMIT and not window_exhausted:
                 next_task = asyncio.create_task(
                     asyncio.to_thread(mastodon_client.fetch_previous, response)
                 )
 
             handle_page(response)
 
-            if total_posts_seen >= TIMELINE_LIMIT:
+            if total_posts_seen >= TIMELINE_LIMIT or window_exhausted:
                 if next_task:
                     next_task.cancel()
                     with suppress(asyncio.CancelledError):
@@ -199,9 +211,9 @@ def fetch_posts_and_boosts(
         asyncio.run(async_fetch_loop())
     else:
         response = timeline_method(**base_timeline_kwargs)
-        while response and total_posts_seen < TIMELINE_LIMIT:
+        while response and total_posts_seen < TIMELINE_LIMIT and not window_exhausted:
             handle_page(response)
-            if total_posts_seen >= TIMELINE_LIMIT:
+            if total_posts_seen >= TIMELINE_LIMIT or window_exhausted:
                 break
             response = mastodon_client.fetch_previous(response)
 
