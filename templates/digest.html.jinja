@@ -5,14 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
     <title>Mastodon Digest - {{ hours }} Hours of Popular Posts</title>
     <meta name="description" content="A curated digest of the most popular posts from your Mastodon timeline in the past {{ hours }} hours.">
-    
+
     <!-- Preload critical resources -->
     <link rel="preload" href="style.css" as="style">
     <link rel="preload" href="style.js" as="script">
-    
+
     <!-- Stylesheets -->
     <link rel="stylesheet" href="style.css">
-    
+
     <!-- Theme detection script (inline for immediate execution) -->
     <script>
         // Prevent FOUC by setting theme immediately
@@ -20,23 +20,23 @@
             const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
             const prefersContrast = window.matchMedia('(prefers-contrast: high)').matches;
             const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-            
+
             document.documentElement.setAttribute('data-theme', prefersDark ? 'dark' : 'light');
             document.documentElement.setAttribute('data-contrast', prefersContrast ? 'high' : 'normal');
             document.documentElement.setAttribute('data-motion', prefersReducedMotion ? 'reduced' : 'normal');
         })();
     </script>
-    
+
     <!-- Icons and PWA manifest -->
     <link rel="icon" href="icon.png" sizes="any">
     <link rel="icon" href="icon.svg" type="image/svg+xml">
     <link rel="apple-touch-icon" href="icon-180.png">
-    
+
     <!-- Open Graph and Twitter Card meta tags -->
     <meta property="og:title" content="Mastodon Digest - {{ hours }} Hours">
     <meta property="og:description" content="Popular posts from the past {{ hours }} hours using {{ scorer.lower() }} scoring and {{ threshold }} threshold.">
     <meta property="og:type" content="website">
-    
+
     <!-- Performance and security -->
     <meta http-equiv="X-Content-Type-Options" content="nosniff">
     <meta name="referrer" content="strict-origin-when-cross-origin">
@@ -45,20 +45,20 @@
 <body>
     <!-- Skip navigation for screen readers -->
     <a href="#main-content" class="sr-only">Skip to main content</a>
-    
+
     <div id="container">
         <main class="blocks" id="main-content">
-            
+
             <header class="header" role="banner">
                 <h1 class="title">Mastodon Digest</h1>
-                
-                <div class="run_time date" 
-                     data-date="{{ rendered_at }}" 
+
+                <div class="run_time date"
+                     data-date="{{ rendered_at }}"
                      aria-label="Digest generated time"
                      role="status">
                 </div>
-                
-                <div class="run_score" 
+
+                <div class="run_score"
                      aria-label="Digest parameters"
                      role="group">
                     <div>
@@ -74,7 +74,7 @@
                         <span class="meta_desc">threshold</span>
                     </div>
                 </div>
-                
+
                 <!-- Keyboard shortcuts help -->
                 <details class="help-section">
                     <summary class="help-toggle">Keyboard Shortcuts</summary>
@@ -93,8 +93,8 @@
                 <h2 id="posts-heading" class="stream_title">
                     <span>Posts</span>
                 </h2>
-                <div class="posts" 
-                     role="feed" 
+                <div class="posts"
+                     role="feed"
                      aria-label="Popular posts from your timeline"
                      aria-live="polite">
                     {% for post in posts %}
@@ -107,8 +107,8 @@
                 <h2 id="boosts-heading" class="stream_title">
                     <span>Boosts</span>
                 </h2>
-                <div class="posts" 
-                     role="feed" 
+                <div class="posts"
+                     role="feed"
                      aria-label="Popular boosts from your timeline"
                      aria-live="polite">
                     {% for post in boosts %}
@@ -129,21 +129,12 @@
 
     <!-- Loading indicator for JavaScript interactions -->
     <div id="loading-indicator" class="sr-only" aria-live="polite" aria-atomic="true"></div>
-    
+
     <!-- Error message container -->
     <div id="error-container" aria-live="assertive" aria-atomic="true"></div>
 
     <!-- Enhanced JavaScript -->
     <script src="style.js" defer></script>
-    
-    <!-- Service Worker registration (optional) -->
-    <script>
-        if ('serviceWorker' in navigator) {
-            window.addEventListener('load', () => {
-                navigator.serviceWorker.register('/sw.js')
-                    .catch(err => console.log('SW registration failed'));
-            });
-        }
-    </script>
+
 </body>
 </html>
