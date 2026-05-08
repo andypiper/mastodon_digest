@@ -94,7 +94,7 @@ def run(
             access_token=mastodon_token,
             api_base_url=mastodon_base_url,
             user_agent="mastodon_digest_builder",
-            request_timeout=10,
+            request_timeout=30,
         )
 
         # 1. Fetch all the posts and boosts from our home timeline that we haven't interacted with
