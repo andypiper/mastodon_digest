@@ -1,16 +1,46 @@
 from __future__ import annotations
 
 import asyncio
+import time
 from contextlib import suppress
 from datetime import datetime, timedelta, timezone
 from typing import TYPE_CHECKING
 
-from mastodon.errors import MastodonAPIError, MastodonNotFoundError
+import requests
+from mastodon.errors import MastodonAPIError, MastodonNetworkError, MastodonNotFoundError
 
 from models import ScoredPost
 
 if TYPE_CHECKING:
     from mastodon import Mastodon
+
+
+def _retry_mastodon_call(
+    func,
+    *args,
+    retries: int = 3,
+    base_delay: float = 2.0,
+    **kwargs,
+):
+    last_error = None
+    for attempt in range(1, retries + 1):
+        try:
+            return func(*args, **kwargs)
+        except (
+            MastodonNetworkError,
+            requests.exceptions.ReadTimeout,
+            requests.exceptions.ConnectionError,
+        ) as error:
+            last_error = error
+            if attempt == retries:
+                break
+            delay = base_delay * attempt
+            print(
+                f"Warning: Mastodon request failed ({attempt}/{retries}): {error}. "
+                f"Retrying in {delay:.1f}s..."
+            )
+            time.sleep(delay)
+    raise last_error
 
 
 def _should_filter_user(
@@ -80,9 +110,13 @@ def fetch_posts_and_boosts(
 
     # Get authenticated user info from API
     try:
-        mastodon_acct = mastodon_client.me()["acct"].strip().lower()
+        mastodon_acct = _retry_mastodon_call(mastodon_client.me)["acct"].strip().lower()
         print(f"Authenticated as: @{mastodon_acct}")
-    except MastodonAPIError as e:
+    except (
+        MastodonAPIError,
+        MastodonNetworkError,
+        requests.exceptions.RequestException,
+    ) as e:
         print(f"Error getting current user: {e}")
         return [], []
 
@@ -90,16 +124,24 @@ def fetch_posts_and_boosts(
     filters = None
     filters_version = None
     try:
-        filters = mastodon_client.filters_v2()
+        filters = _retry_mastodon_call(mastodon_client.filters_v2)
         filters_version = "v2"
     except MastodonNotFoundError:
         try:
-            filters = mastodon_client.filters()
+            filters = _retry_mastodon_call(mastodon_client.filters)
             filters_version = "v1"
-        except MastodonAPIError as error:
+        except (
+            MastodonAPIError,
+            MastodonNetworkError,
+            requests.exceptions.RequestException,
+        ) as error:
             print(f"Warning: unable to load filters (v1): {error}")
             filters = None
-    except MastodonAPIError as error:
+    except (
+        MastodonAPIError,
+        MastodonNetworkError,
+        requests.exceptions.RequestException,
+    ) as error:
         print(f"Warning: unable to load filters (v2): {error}")
         filters = None
 
@@ -184,12 +226,25 @@ def fetch_posts_and_boosts(
     async def async_fetch_loop() -> None:
         nonlocal total_posts_seen, window_exhausted
 
-        response = await asyncio.to_thread(timeline_method, **base_timeline_kwargs)
+        try:
+            response = await asyncio.to_thread(
+                _retry_mastodon_call, timeline_method, **base_timeline_kwargs
+            )
+        except (
+            MastodonAPIError,
+            MastodonNetworkError,
+            requests.exceptions.RequestException,
+        ) as error:
+            print(f"Warning: unable to fetch timeline: {error}")
+            return
+
         while response and total_posts_seen < TIMELINE_LIMIT and not window_exhausted:
             next_task = None
             if total_posts_seen < TIMELINE_LIMIT and not window_exhausted:
                 next_task = asyncio.create_task(
-                    asyncio.to_thread(mastodon_client.fetch_previous, response)
+                    asyncio.to_thread(
+                        _retry_mastodon_call, mastodon_client.fetch_previous, response
+                    )
                 )
 
             handle_page(response)
@@ -202,19 +257,44 @@ def fetch_posts_and_boosts(
                 break
 
             if next_task:
-                with suppress(asyncio.CancelledError):
-                    response = await next_task
+                try:
+                    with suppress(asyncio.CancelledError):
+                        response = await next_task
+                except (
+                    MastodonAPIError,
+                    MastodonNetworkError,
+                    requests.exceptions.RequestException,
+                ) as error:
+                    print(f"Warning: unable to fetch next timeline page: {error}")
+                    break
             else:
                 response = None
 
     if use_async_fetch:
         asyncio.run(async_fetch_loop())
     else:
-        response = timeline_method(**base_timeline_kwargs)
+        try:
+            response = _retry_mastodon_call(timeline_method, **base_timeline_kwargs)
+        except (
+            MastodonAPIError,
+            MastodonNetworkError,
+            requests.exceptions.RequestException,
+        ) as error:
+            print(f"Warning: unable to fetch timeline: {error}")
+            return posts, boosts
+
         while response and total_posts_seen < TIMELINE_LIMIT and not window_exhausted:
             handle_page(response)
             if total_posts_seen >= TIMELINE_LIMIT or window_exhausted:
                 break
-            response = mastodon_client.fetch_previous(response)
+            try:
+                response = _retry_mastodon_call(mastodon_client.fetch_previous, response)
+            except (
+                MastodonAPIError,
+                MastodonNetworkError,
+                requests.exceptions.RequestException,
+            ) as error:
+                print(f"Warning: unable to fetch next timeline page: {error}")
+                break
 
     return posts, boosts
